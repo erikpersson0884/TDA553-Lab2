@@ -110,10 +110,6 @@ public abstract class Car extends Positionable implements Movable{
     
     protected abstract double speedFactor();
 
-    protected abstract void incrementSpeed(double amount);
-
-    protected abstract void decrementSpeed(double amount);
-
     protected double calcNewIncreasedSpeed(double amount) {
         double newSpeed = getCurrentSpeed() + speedFactor() * amount;
         return newSpeed;
@@ -135,5 +131,20 @@ public abstract class Car extends Positionable implements Movable{
         boolean speedIsIncreasing = newSpeed <= getCurrentSpeed();
         boolean speedIsNotNegative  = 0 <= newSpeed;
         return speedIsIncreasing && speedIsNotNegative;
+    }
+
+    
+    protected void incrementSpeed(double amount){
+        double newSpeed = calcNewIncreasedSpeed(amount);
+        boolean validSpeed = newIncreasedSpeedIsValid(newSpeed);
+
+	    if (validSpeed) setCurrentSpeed(newSpeed);
+    }
+
+    protected void decrementSpeed(double amount){
+        double newSpeed = calcNewDecreasedSpeed(amount);
+        boolean validSpeed = newDecreasedSpeedIsValid(newSpeed);
+
+        if (validSpeed) setCurrentSpeed(newSpeed);
     }
 }

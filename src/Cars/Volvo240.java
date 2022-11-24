@@ -16,19 +16,4 @@ public class Volvo240 extends Car{
         return getEnginePower() * 0.01 * trimFactor;
     }
     
-    @Override
-    protected void incrementSpeed(double amount){
-        double newSpeed = calcNewIncreasedSpeed(amount);
-        boolean validSpeed = newIncreasedSpeedIsValid(newSpeed);
-
-	    if (validSpeed) setCurrentSpeed(Math.min(newSpeed, getEnginePower()));
-    }
-
-    @Override
-    protected void decrementSpeed(double amount){
-        double newSpeed = calcNewDecreasedSpeed(amount);
-        boolean validSpeed = newDecreasedSpeedIsValid(newSpeed);
-
-        if (validSpeed) setCurrentSpeed(Math.max(newSpeed, 0));
-    }
 }

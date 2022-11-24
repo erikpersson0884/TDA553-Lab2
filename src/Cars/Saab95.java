@@ -29,20 +29,4 @@ public class Saab95 extends Car{
         
         return getEnginePower() * 0.01 * turbo;
     }
-
-    @Override
-    protected void incrementSpeed(double amount){
-        double newSpeed = calcNewIncreasedSpeed(amount);
-        boolean validSpeed = newIncreasedSpeedIsValid(newSpeed);
-
-        if (validSpeed) setCurrentSpeed(newSpeed);
-    }
-
-    @Override
-    protected void decrementSpeed(double amount){
-        double newSpeed = calcNewDecreasedSpeed(amount);
-        boolean validSpeed = newDecreasedSpeedIsValid(newSpeed);
-
-        if (validSpeed) setCurrentSpeed(newSpeed);
-    }
 }
