@@ -1,4 +1,5 @@
 package Cars;
+import Ramps.*;
 
 import java.awt.Color;
 
@@ -6,12 +7,11 @@ import Ramps.TransporterRamp;
 
 public class Transporter extends Truck {
     
-    //private TransporterRamp ramp;
+    private TransporterRamp ramp;
 
     public Transporter(double enginePower, Color color, double x, double y){
         super("Scania", enginePower, color, 2, x, y);
-        this.
-        //this.ramp = new TransporterRamp();
+        this.ramp = new TransporterRamp();
     }
 
     @Override

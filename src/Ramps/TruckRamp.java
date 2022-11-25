@@ -1,23 +1,12 @@
 package Ramps;
 
-public class TruckRamp implements Ramp {
-    //private boolean RampIsUp;
+public class TruckRamp extends Ramp {
     private int rampAngle;
     
     public TruckRamp() {
         this.rampAngle = 0;
     }
-   
-    public boolean rampIsDown() {
-        if (rampAngle == 0) {
-            return true;
-        } else if (0 < rampAngle && rampAngle <= 70) {
-            return false;
-        } else {
-            throw new IllegalArgumentException("RampAngle is not valid");
-        }
-    }  
-    
+       
     public int getRampAngle(){
         return rampAngle;
     }
@@ -30,6 +19,7 @@ public class TruckRamp implements Ramp {
 
     public void raiseRamp(int degrees){
         ensureDegreesIsValidRange(degrees);
+        setRampState("UP");
 
         int newAngle = getRampAngle() + degrees;
         if (newAngle <= 70) {
@@ -46,7 +36,12 @@ public class TruckRamp implements Ramp {
         if  (0 < degrees && newAngle >= 0) {
             setRampAngle(newAngle);
         }
-            
+        
+        if (getRampAngle() == 0) {
+            setRampState("DOWN");
+        } else {
+            setRampState("UP");
+        }
     }
 
      private void ensureDegreesIsValidRange(int degrees) {

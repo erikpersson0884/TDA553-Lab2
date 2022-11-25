@@ -6,6 +6,7 @@ import Ramps.TruckRamp;
 
 public class Scania extends Truck {
     private TruckRamp ramp;
+    
     public Scania(double enginePower, Color color, double x, double y){
         super("Scania", enginePower, color, 2, x, y);
         this.ramp = new TruckRamp();
