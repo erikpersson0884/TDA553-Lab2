@@ -1,6 +1,7 @@
 package Cars;
 
 import java.awt.*;
+import java.math.BigDecimal;
 
 public abstract class Car extends Vehicle {
 
@@ -15,5 +16,16 @@ public abstract class Car extends Vehicle {
         } else {
             throw new IllegalArgumentException("Only values in range [0-1] are accepted.");
         }
+    }
+
+    public void loadCar(){
+        setX(null);
+        setY(null);
+    }
+
+    public void setCoordsForUnloadedCar(BigDecimal transporterX, BigDecimal transporterY) {
+        BigDecimal spaceFromTransporter = new BigDecimal(20);
+        setX(transporterX.add(spaceFromTransporter));
+        setY(transporterY.add(spaceFromTransporter));
     }
 }

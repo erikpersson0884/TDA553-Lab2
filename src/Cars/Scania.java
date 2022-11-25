@@ -47,17 +47,17 @@ public class Scania{
         truck.turnRight();
     }
 
-    // -------- Methods with own implementation ------------
+
  
-    // Methods for changing the speed of a Scania Truck
+    /**
+        Method for increasing speed for a Scania Truck. 
+        @param amount
+     */
     public void gas(double amount) {
-        // Can only gas between 0 and 1
-        if (!(0 <= amount && amount <= 1)) {
-            throw new IllegalArgumentException("Only values in range [0-1] are accepted.");
-        } else if (truck.getRamp().getRampIsDown()) {
-            truck.incrementSpeed(amount);
-        }
+        truck.gas(amount);
     }
+
+    // -------- Methods with own implementation ------------
 
     public int getRampAngle() {
         return truck.getRamp().getRampAngle();

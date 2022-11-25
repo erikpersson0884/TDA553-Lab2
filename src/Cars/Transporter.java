@@ -3,7 +3,7 @@ package Cars;
 import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.Stack;
-
+import CustomExceptions.*;
 
 public class Transporter{
   
@@ -85,17 +85,31 @@ public class Transporter{
     //--------  Methods for loading cars ----------
 
     public void loadCar(Car carToBeLoaded) {
-        boolean carIsInRange = carIsInRange(carToBeLoaded);
-        
+
         if (!getRampIsDown()) {
-            throw new IllegalArgumentException("The transporters' ramp is not down");
-        } else if (loadedCars.size() <= maxNumberOfCars) {
-            throw new Ille
-        } else if (!carIsInRange) {
-            throw new IllegalArgumentException("The car is out of range");
-        } else {
+            throw new RampIsNotDownException("The transporters' ramp is not down");
+
+        } else if (loadedCars.size() >= maxNumberOfCars) {
+            throw new TransporterFullException("The transporter is full.");
+            
+        } else if (loadedCars.contains(carToBeLoaded)) {
+            throw new CarIsAlreadyLoadedException("Car is already on Transporter");
+
+        } else if (carIsInRange(carToBeLoaded)) {
+            carToBeLoaded.loadCar();
             loadedCars.push(carToBeLoaded);
         }
+    }
+
+    public void unloadCar(Car carToBeUnloaded){
+        if (!getRampIsDown()) {
+            throw new RampIsNotDownException("The transporters' ramp is not down");
+        } else if (!loadedCars.contains(carToBeUnloaded)) {
+            throw new CarIsNotLoadedException("The car is not loaded on the Transporter.");
+        } else if (loadedCars.lastElement() == carToBeUnloaded) {
+            loadedCars.pop();
+            carToBeUnloaded.setCoordsForUnloadedCar(getY(), getX());
+        } 
     }
 
     private boolean carIsInRange(Car carToBeLoaded) {
@@ -111,5 +125,4 @@ public class Transporter{
         
         return carIsInRange;
     }
-
 }
