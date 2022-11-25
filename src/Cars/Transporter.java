@@ -10,8 +10,19 @@ public class Transporter extends Truck {
     private TransporterRamp ramp;
 
     public Transporter(double enginePower, Color color, double x, double y){
-        super("Scania", enginePower, color, 2, x, y);
+        super("Car Transporter", enginePower, color, 2, x, y);
         this.ramp = new TransporterRamp();
+    }
+
+    @Override
+    // Methods for changing the speed of a car
+    public void gas(double amount){
+        // Can only gas between 0 and 1
+        if (!(0 <= amount && amount <= 1)){
+            throw new IllegalArgumentException("Only values in range [0-1] are accepted.");
+        } else if (ramp.rampIsUp() ){
+            incrementSpeed(amount);
+        }
     }
 
     @Override
