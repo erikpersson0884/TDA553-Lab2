@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
+import java.awt.Color;
 import java.math.BigDecimal;
 
 import org.junit.After;
@@ -16,7 +17,7 @@ public class ScaniaTest {
     
     @Before
     public void createTestScania(){
-        myScania = new Scania(0, null, 0, 0);
+        myScania = new Scania(500, Color.BLACK, 0, 0);
     }
 
     @After
@@ -95,14 +96,14 @@ public class ScaniaTest {
 
     @Test
     public void ramp_cannot_higher_than_70_degrees(){
-        myScania.raiseRamp();
+        myScania.raiseRampToMax();
         myScania.raiseRamp(20);
         assertTrue(myScania.getRampAngle() <= 70);
     }
 
     @Test
     public void ramp_cannot_be_lower_than_0_degrees() {
-        myScania.lowerRamp();
+        myScania.lowerRampToMin();
         myScania.lowerRamp(20);
         assertTrue(myScania.getRampAngle() >= 0);
     }
