@@ -1,4 +1,4 @@
-# Lab 1
+# Lab 2
 ## TDA 553 Object-Oriented Programming and Design
 
 
