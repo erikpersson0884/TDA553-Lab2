@@ -7,11 +7,12 @@ import java.util.Stack;
 import CustomExceptions.*;
 import Ramps.TransporterRamp;
 import Utility.CarStorage;
-
+import Utility.IPositionable;
+import Vehicles.Movable;
 import Vehicles.Cars.ICar;
 
 
-public class Transporter {
+public class Transporter implements Movable, IPositionable{
 
     private Truck truck;
     private int maxAngle;

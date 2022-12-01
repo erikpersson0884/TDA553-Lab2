@@ -6,8 +6,6 @@ import java.util.Stack;
 
 import CustomExceptions.*;
 import Vehicles.Cars.ICar;
-import Vehicles.Cars.Volvo240;
-import Vehicles.Cars.Car;
 
 public class CarStorage implements ICarStorage {
     private int maxCapacity;
