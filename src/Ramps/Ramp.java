@@ -1,7 +1,7 @@
-package Vehicles;
+package Ramps;
 
 
-public class Ramp {
+public abstract class Ramp {
     private int rampAngle;
     private boolean rampIsDown;
     private final int MAX_ANGLE;
@@ -81,4 +81,7 @@ public class Ramp {
             throw new IllegalArgumentException("Degrees must be in the interval [0-maxAngle]");
         }
     }
+
+    public abstract boolean rampIsInCorrectPosistionWhenMoving();
+
 }

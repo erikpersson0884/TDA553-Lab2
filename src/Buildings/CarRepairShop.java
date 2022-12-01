@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import Utility.Positionable;
 import Utility.CarStorage;
 import Vehicles.Cars.Car;
+import Vehicles.Cars.ICar;
 
 public class CarRepairShop extends Positionable{
     private CarStorage carStorage;
 
     public CarRepairShop(double x, double y, double facingDirection, int maxCarCapacity) {
         super(x, y, facingDirection);
-        carStorage = new CarStorage(maxCarCapacity, new ArrayList<Car>(), 30);
+        carStorage = new CarStorage(maxCarCapacity, new ArrayList<ICar>(), 30);
     }
 
     public int getMaxCapacity() {
@@ -19,11 +20,11 @@ public class CarRepairShop extends Positionable{
     }
         //--------  Methods for loading cars ----------
 
-    public void loadCar(Car carToBeLoaded) {
+    public void loadCar(ICar carToBeLoaded) {
         carStorage.loadCar(carToBeLoaded, this);
     }
     
-    public void unloadCar(Car carToBeUnloaded){
+    public void unloadCar(ICar carToBeUnloaded){
         carStorage.unLoadCar(carToBeUnloaded, this);
 
     } 

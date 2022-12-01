@@ -5,24 +5,25 @@ import java.math.BigDecimal;
 import java.util.Stack;
 
 import CustomExceptions.*;
+import Ramps.TransporterRamp;
 import Utility.CarStorage;
-import Vehicles.Cars.Car;
-import Vehicles.Trucks.Truck;
-import Vehicles.Vehicle;
 
-public class Transporter{
-  
+import Vehicles.Cars.ICar;
+
+
+public class Transporter {
+
     private Truck truck;
     private int maxAngle;
 
     private CarStorage carStorage;
 
-    public Transporter(double enginePower, Color color, double x, double y){
+    public Transporter(double enginePower, Color color, double x, double y) {
         maxAngle = 0;
-        truck = new Truck("transporter", enginePower, color, 0, x, y, maxAngle);
-        carStorage = new CarStorage(7, new Stack<Car>(), 30);
+        truck = new Truck("transporter", enginePower, color, 0, x, y, maxAngle, new TransporterRamp());
+        carStorage = new CarStorage(7, new Stack<ICar>(), 30);
     }
-    
+
     // ------------ delegated methods -------------
 
     public double getCurrentSpeed() {
@@ -32,7 +33,7 @@ public class Transporter{
     public double getEnginePower() {
         return truck.getEnginePower();
     }
-    
+
     public BigDecimal getX() {
         return truck.getX();
     }
@@ -40,17 +41,19 @@ public class Transporter{
     public BigDecimal getY() {
         return truck.getY();
     }
+
     public boolean getRampIsDown() {
         return truck.getRamp().getRampIsDown();
     }
-    public void move(){
+
+    public void move() {
         truck.move();
     }
 
-    public void turnLeft(){
+    public void turnLeft() {
         truck.turnLeft();
     }
-    
+
     public void turnRight() {
         truck.turnRight();
     }
@@ -63,37 +66,31 @@ public class Transporter{
         return truck.speedFactor();
     }
 
-    public void raiseRamp(){
-            truck.raiseRampToMax();
+    public void raiseRamp() {
+        truck.raiseRampToMax();
     }
 
-    public void lowerRamp(){
-            truck.lowerRampToMin();
+    public void lowerRamp() {
+        truck.lowerRampToMin();
     }
 
     // ----------- methods with own implementation ---------
-    
+
     public void gas(double amount) {
-        // Can only gas between 0 and 1
-        if (!(0 <= amount && amount <= 1)) {
-            throw new IllegalArgumentException("Only values in range [0-1] are accepted.");
-        } else if (!truck.getRamp().getRampIsDown()) {
-            truck.incrementSpeed(amount);
-        }
+        truck.gas(amount);
     }
 
-    //--------  Methods for loading cars ----------
+    // -------- Methods for loading cars ----------
 
-    public void loadCar(Car carToBeLoaded) {
+    public void loadCar(ICar carToBeLoaded) {
         carStorage.loadCar(carToBeLoaded, truck);
 
         if (!getRampIsDown()) {
             throw new RampIsNotDownException("The transporters' ramp is not down");
-
         }
     }
 
-    public void unloadCar(Car carToBeUnloaded){
+    public void unLoadCar(ICar carToBeUnloaded) {
         if (!getRampIsDown()) {
             throw new RampIsNotDownException("The transporters' ramp is not down");
         }

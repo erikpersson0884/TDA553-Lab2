@@ -13,6 +13,7 @@ import org.junit.Test;
 import Buildings.CarRepairShop;
 import CustomExceptions.*;
 import Vehicles.Cars.Car;
+import Vehicles.Cars.ICar;
 import Vehicles.Cars.Volvo240;
 
 public class CarRepairShopTest {
@@ -31,7 +32,7 @@ public class CarRepairShopTest {
 
     @Test
     public void cant_load_car_that_is_already_in_carRepairShop() {
-        Volvo240 myVolvo = new Volvo240(0, null, 0, 0);
+        ICar myVolvo = new Volvo240(0, null, 0, 0);
     
         assertThrows(CarIsAlreadyLoadedException.class, () -> {  
             carRepairShop.loadCar(myVolvo);  
@@ -41,7 +42,7 @@ public class CarRepairShopTest {
 
     @Test 
     public void cannot_unload_car_thats_not_in_repairShop(){
-        Car myVolvo = new Volvo240(33, Color.blue, 10, 6);
+        ICar myVolvo = new Volvo240(33, Color.blue, 10, 6);
 
         carRepairShop.loadCar(myVolvo);
         carRepairShop.unloadCar(myVolvo);
@@ -55,7 +56,7 @@ public class CarRepairShopTest {
     
     @Test
     public void car_gets_coordinates_when_unloaded() {
-        Car myVolvo = new Volvo240(33, Color.blue, 10, 6);
+        ICar myVolvo = new Volvo240(33, Color.blue, 10, 6);
 
         carRepairShop.loadCar(myVolvo);
         carRepairShop.unloadCar(myVolvo);
@@ -69,7 +70,7 @@ public class CarRepairShopTest {
 
         assertThrows(CarStorageFullException.class, () -> {
             for (int i=0; i < ToManyCarsToLoad; i++) {
-                carRepairShop.loadCar( new Volvo240(0, null, 0, 0));
+                carRepairShop.loadCar(new Volvo240(0, null, 0, 0));
             }
         });
         

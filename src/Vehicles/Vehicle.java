@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import Utility.Positionable;
 
 
-public abstract class Vehicle extends Positionable implements Movable {
+public abstract class Vehicle extends Positionable implements Movable, IVehicle {
     // Instance variables
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car

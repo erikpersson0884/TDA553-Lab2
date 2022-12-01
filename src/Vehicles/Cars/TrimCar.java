@@ -6,7 +6,6 @@ public class TrimCar extends Car {
 
     public TrimCar(String name, double enginePower, Color color, int nrDoors, double x, double y){
         super(name, enginePower, color, nrDoors, x, y);
-	
     }
     
     // Methods

@@ -1,9 +1,8 @@
 package Utility;
 
-
-import Vehicles.Cars.Car;
+import Vehicles.Cars.ICar;
 
 public interface ICarStorage{
-    void loadCar(Car carToBeLoaded, Positionable currentPositionableObject);
-    void unLoadCar(Car carToBeUnloaded, Positionable currentPositionableObject);
+    void loadCar(ICar carToBeLoaded, Positionable currentPositionableObject);
+    void unLoadCar(ICar carToBeUnloaded, Positionable currentPositionableObject);
 }

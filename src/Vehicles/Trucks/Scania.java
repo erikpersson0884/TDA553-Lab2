@@ -3,14 +3,18 @@ package Vehicles.Trucks;
 import java.awt.Color;
 import java.math.BigDecimal;
 
-public class Scania{
+import Ramps.TruckRamp;
+import Utility.IPositionable;
+import Vehicles.Movable;
+
+public class Scania implements ITruck, Movable, IPositionable{
     //private Ramp ramp;
     private Truck truck;
     private int maxAngle;
 
     public Scania(double enginePower, Color color, double x, double y){
         this.maxAngle= 70;
-        this.truck = new Truck("Scania", enginePower, color, 2, x, y, maxAngle);
+        this.truck = new Truck("Scania", enginePower, color, 2, x, y, maxAngle, new TruckRamp());
     }
 
     // --------- delegated methods -----------------
@@ -47,8 +51,6 @@ public class Scania{
         truck.turnRight();
     }
 
-
- 
     /**
         Method for increasing speed for a Scania Truck. 
         @param amount
@@ -84,5 +86,11 @@ public class Scania{
     public void lowerRampToMin() {
         if (getCurrentSpeed() == 0)
             truck.getRamp().lowerRamp(truck.getRamp().getMinAngle());
+    }
+
+    @Override
+    public boolean rampIsInCorrectPosistion() {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

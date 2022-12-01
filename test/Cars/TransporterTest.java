@@ -14,6 +14,7 @@ import org.junit.Test;
 import CustomExceptions.CarIsAlreadyLoadedException;
 import CustomExceptions.CarStorageFullException;
 import Vehicles.Cars.Car;
+import Vehicles.Cars.ICar;
 import Vehicles.Cars.Saab95;
 import Vehicles.Cars.Volvo240;
 import Vehicles.Trucks.Transporter;
@@ -115,11 +116,11 @@ public class TransporterTest {
 
     @Test
     public void loading_car_to_transporter_when_it_is_full_should_not_add_the_car() {
-        Car[] myCars = {new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0), new Saab95(0, null, 0, 0), new Volvo240(0, null, 0, 0),
+        ICar[] myCars = {new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0), new Saab95(0, null, 0, 0), new Volvo240(0, null, 0, 0),
                 new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0)};
 
         assertThrows(CarStorageFullException.class, () -> {
-            for (Car car : myCars) {
+            for (ICar car : myCars) {
                 Transporter.loadCar(car);
             }
         });
@@ -127,7 +128,7 @@ public class TransporterTest {
 
     @Test
     public void cant_load_same_car_twice_in_the_transporter() {
-        Volvo240 myVolvo = new Volvo240(0, null, 0, 0);
+        ICar myVolvo = new Volvo240(0, null, 0, 0);
             
         assertThrows(CarIsAlreadyLoadedException.class, () -> {  
             Transporter.loadCar(myVolvo);  
@@ -139,7 +140,7 @@ public class TransporterTest {
     public void car_get_new_coordinates_when_unloaded() {
         double prevX = 0;
         double prevY = 0;
-        Volvo240 myVolvo = new Volvo240(0, null, prevX, prevY);
+        ICar myVolvo = new Volvo240(0, null, prevX, prevY);
         Transporter.loadCar(myVolvo);
         Transporter.raiseRamp();
         Transporter.gas(1);
@@ -150,7 +151,7 @@ public class TransporterTest {
         }
 
         Transporter.lowerRamp();
-        Transporter.unloadCar(myVolvo);
+        Transporter.unLoadCar(myVolvo);
         
         assertFalse(prevX == myVolvo.getX().doubleValue());
     }

@@ -3,7 +3,7 @@ package Utility;
 
 import java.math.BigDecimal;
 
-public abstract class Positionable {
+public abstract class Positionable implements IPositionable {
     // Instance variables
     private BigDecimal x;
     private BigDecimal y;

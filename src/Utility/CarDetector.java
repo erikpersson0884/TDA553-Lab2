@@ -1,7 +1,7 @@
 package Utility;
 
 
-import Vehicles.Cars.Car;
+import Vehicles.Cars.ICar;
 
 public class CarDetector {
     /** Detects if a Car object is nearby a Positionable object according to the specified distance. 
@@ -10,7 +10,7 @@ public class CarDetector {
      * @param maxRangeForDetectingCars
      * @return boolean
      */
-    public static boolean carIsInRange(Car carToBeDetected, Positionable currentPositionableObject, int maxRangeForDetectingCars) {
+    public static boolean carIsInRange(ICar carToBeDetected, Positionable currentPositionableObject, int maxRangeForDetectingCars) {
         double carX = carToBeDetected.getX().doubleValue();
         double carY = carToBeDetected.getY().doubleValue();
 
