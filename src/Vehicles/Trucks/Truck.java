@@ -5,7 +5,7 @@ import java.awt.Color;
 import Vehicles.Ramp;
 import Vehicles.Vehicle;
 
-public class Truck extends Vehicle {
+public class Truck extends Vehicle implements ITruck {
     private Ramp ramp;
 
     public Truck(String modelname, double enginePower, Color color, int nrDoors, double x, double y, int maxAngle) {
@@ -18,13 +18,19 @@ public class Truck extends Vehicle {
         return getEnginePower() * 0.01;
     }
 
+	@Override
+	public boolean rampIsInCorrectPosistion() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
     @Override
     // Methods for changing the speed of a Truck
     public void gas(double amount) {
         // Can only gas between 0 and 1
         if (!(0 <= amount && amount <= 1)) {
             throw new IllegalArgumentException("Only values in range [0-1] are accepted.");
-        } else if (ramp.getRampIsDown()) {
+        } else if (rampIsInCorrectPosistion()) {
             incrementSpeed(amount);
         }
     }

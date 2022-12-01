@@ -55,6 +55,7 @@ public class Scania{
      */
     public void gas(double amount) {
         truck.gas(amount);
+       
     }
 
     // -------- Methods with own implementation ------------

@@ -112,7 +112,7 @@ public abstract class Vehicle extends Positionable implements Movable {
         return speedIsIncreasing && speedIsNotNegative;
     }
 
-    private void incrementSpeed(double amount) {
+    protected void incrementSpeed(double amount) {
         double newSpeed = calcNewIncreasedSpeed(amount);
         boolean validSpeed = newIncreasedSpeedIsValid(newSpeed);
 
