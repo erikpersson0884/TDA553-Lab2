@@ -1,4 +1,5 @@
-package Cars;
+package Vehicles;
+
 
 interface Movable{
     void move();

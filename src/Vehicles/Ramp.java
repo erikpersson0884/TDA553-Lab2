@@ -1,4 +1,5 @@
-package Cars;
+package Vehicles;
+
 
 public class Ramp {
     private int rampAngle;
@@ -20,17 +21,7 @@ public class Ramp {
     public boolean getRampIsDown() {
         return rampIsDown;
     }
-    // public boolean rampIsDown() {
-        // if (rampAngle == 0) {
-            // setRampIsDown(true);
-            // return rampIsDown;
-        // } else if (0 < rampAngle && rampAngle <= 70) {
-            // setRampIsDown(false);
-            // return rampIsDown;
-        // } else {
-            // throw new IllegalArgumentException("RampAngle is not valid");
-        // }
-    // }  
+
     public int getMaxAngle() {
         return this.MAX_ANGLE;
     }

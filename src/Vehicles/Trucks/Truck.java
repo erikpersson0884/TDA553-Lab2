@@ -1,6 +1,9 @@
-package Cars;
+package Vehicles.Trucks;
 
 import java.awt.Color;
+
+import Vehicles.Ramp;
+import Vehicles.Vehicle;
 
 public class Truck extends Vehicle {
     private Ramp ramp;

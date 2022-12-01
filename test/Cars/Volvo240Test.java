@@ -10,6 +10,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import Vehicles.Cars.Volvo240;
+
 public class Volvo240Test {
     private Volvo240 myVolvo;
     

@@ -1,6 +1,5 @@
 package Cars;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
@@ -11,6 +10,8 @@ import java.math.BigDecimal;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import Vehicles.Cars.Saab95;
 
 public class Saab95Test {
     private Saab95 mySaab95;

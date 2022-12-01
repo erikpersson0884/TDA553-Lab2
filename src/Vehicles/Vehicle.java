@@ -1,7 +1,11 @@
-package Cars;
+package Vehicles;
+
 
 import java.awt.Color;
 import java.math.BigDecimal;
+
+import Utility.Positionable;
+
 
 public abstract class Vehicle extends Positionable implements Movable {
     // Instance variables
@@ -23,9 +27,6 @@ public abstract class Vehicle extends Positionable implements Movable {
     }
 
     // Getters and Setters
-    public int getNrDoors() {
-        return nrDoors;
-    }
 
     public double getEnginePower() {
         return enginePower;
@@ -39,11 +40,8 @@ public abstract class Vehicle extends Positionable implements Movable {
         return color;
     }
 
-    public void setColor(Color clr) {
-        color = clr;
-    }
 
-    public void setCurrentSpeed(double newSpeed) {
+    private void setCurrentSpeed(double newSpeed) {
         currentSpeed = newSpeed;
     }
 
@@ -92,29 +90,29 @@ public abstract class Vehicle extends Positionable implements Movable {
 
     protected abstract double speedFactor();
 
-    protected double calcNewIncreasedSpeed(double amount) {
+    private double calcNewIncreasedSpeed(double amount) {
         double newSpeed = getCurrentSpeed() + speedFactor() * amount;
         return newSpeed;
     }
 
-    protected boolean newIncreasedSpeedIsValid(double newSpeed) {
+    private boolean newIncreasedSpeedIsValid(double newSpeed) {
         boolean speedIsIncreasing = newSpeed >= getCurrentSpeed();
         boolean speedIsNotTooHigh = newSpeed <= getEnginePower();
         return speedIsIncreasing && speedIsNotTooHigh;
     }
 
-    protected double calcNewDecreasedSpeed(double amount) {
+    private double calcNewDecreasedSpeed(double amount) {
         double newSpeed = getCurrentSpeed() - speedFactor() * amount;
         return newSpeed;
     }
 
-    protected boolean newDecreasedSpeedIsValid(double newSpeed) {
+    private boolean newDecreasedSpeedIsValid(double newSpeed) {
         boolean speedIsIncreasing = newSpeed <= getCurrentSpeed();
         boolean speedIsNotNegative = 0 <= newSpeed;
         return speedIsIncreasing && speedIsNotNegative;
     }
 
-    protected void incrementSpeed(double amount) {
+    private void incrementSpeed(double amount) {
         double newSpeed = calcNewIncreasedSpeed(amount);
         boolean validSpeed = newIncreasedSpeedIsValid(newSpeed);
 
@@ -122,7 +120,7 @@ public abstract class Vehicle extends Positionable implements Movable {
             setCurrentSpeed(newSpeed);
     }
 
-    protected void decrementSpeed(double amount) {
+    private void decrementSpeed(double amount) {
         double newSpeed = calcNewDecreasedSpeed(amount);
         boolean validSpeed = newDecreasedSpeedIsValid(newSpeed);
 

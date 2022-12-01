@@ -1,4 +1,4 @@
-package Cars;
+package Vehicles.Cars;
 import java.awt.*;
 
 public class Volvo240 extends Car{

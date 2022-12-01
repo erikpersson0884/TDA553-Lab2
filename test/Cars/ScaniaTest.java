@@ -11,6 +11,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import Vehicles.Trucks.Scania;
+
 
 public class ScaniaTest {
     private Scania myScania;

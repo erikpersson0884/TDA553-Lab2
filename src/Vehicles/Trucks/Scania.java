@@ -1,4 +1,4 @@
-package Cars;
+package Vehicles.Trucks;
 
 import java.awt.Color;
 import java.math.BigDecimal;

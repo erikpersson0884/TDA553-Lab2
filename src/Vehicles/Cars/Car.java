@@ -1,7 +1,9 @@
-package Cars;
+package Vehicles.Cars;
 
 import java.awt.*;
 import java.math.BigDecimal;
+
+import Vehicles.Vehicle;
 
 public abstract class Car extends Vehicle {
 

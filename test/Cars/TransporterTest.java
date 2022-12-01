@@ -11,8 +11,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import CustomExceptions.CarIsAlreadyOnTransporterException;
-import CustomExceptions.TransporterFullException;
+import CustomExceptions.CarIsAlreadyLoadedException;
+import CustomExceptions.CarStorageFullException;
+import Vehicles.Cars.Car;
+import Vehicles.Cars.Saab95;
+import Vehicles.Cars.Volvo240;
+import Vehicles.Trucks.Transporter;
 
 public class TransporterTest {
     private Transporter Transporter;
@@ -23,7 +27,7 @@ public class TransporterTest {
     }
 
     @After
-    public void removeTestScania() {
+    public void removeTestTransporter() {
         // Garbage collector deletes
         Transporter = null;
     }
@@ -114,7 +118,7 @@ public class TransporterTest {
         Car[] myCars = {new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0), new Saab95(0, null, 0, 0), new Volvo240(0, null, 0, 0),
                 new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0)};
 
-        assertThrows(TransporterFullException.class, () -> {
+        assertThrows(CarStorageFullException.class, () -> {
             for (Car car : myCars) {
                 Transporter.loadCar(car);
             }
@@ -125,7 +129,7 @@ public class TransporterTest {
     public void cant_load_same_car_twice_in_the_transporter() {
         Volvo240 myVolvo = new Volvo240(0, null, 0, 0);
             
-        assertThrows(CarIsAlreadyOnTransporterException.class, () -> {  
+        assertThrows(CarIsAlreadyLoadedException.class, () -> {  
             Transporter.loadCar(myVolvo);  
             Transporter.loadCar(myVolvo);
         });

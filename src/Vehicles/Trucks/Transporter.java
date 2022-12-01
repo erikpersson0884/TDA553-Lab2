@@ -1,26 +1,26 @@
-package Cars;
+package Vehicles.Trucks;
 
 import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.Stack;
+
 import CustomExceptions.*;
+import Utility.CarStorage;
+import Vehicles.Cars.Car;
+import Vehicles.Trucks.Truck;
+import Vehicles.Vehicle;
 
 public class Transporter{
   
     private Truck truck;
     private int maxAngle;
-    private int maxNumberOfCars;
-    private Stack<Car> loadedCars;
-    private int maxRangeForLoadingCars;
-    //private Ramp ramp;
+
+    private CarStorage carStorage;
 
     public Transporter(double enginePower, Color color, double x, double y){
         maxAngle = 0;
         truck = new Truck("transporter", enginePower, color, 0, x, y, maxAngle);
-        //public setter for coordinates thing
-        loadedCars = new Stack<Car>();
-        maxNumberOfCars = 7;
-        maxRangeForLoadingCars = 30;
+        carStorage = new CarStorage(7, new Stack<Car>(), 30);
     }
     
     // ------------ delegated methods -------------
@@ -85,44 +85,18 @@ public class Transporter{
     //--------  Methods for loading cars ----------
 
     public void loadCar(Car carToBeLoaded) {
+        carStorage.loadCar(carToBeLoaded, truck);
 
         if (!getRampIsDown()) {
             throw new RampIsNotDownException("The transporters' ramp is not down");
 
-        } else if (loadedCars.size() >= maxNumberOfCars) {
-            throw new TransporterFullException("The transporter is full.");
-            
-        } else if (loadedCars.contains(carToBeLoaded)) {
-            throw new CarIsAlreadyLoadedException("Car is already on Transporter");
-
-        } else if (carIsInRange(carToBeLoaded)) {
-            carToBeLoaded.loadCar();
-            loadedCars.push(carToBeLoaded);
         }
     }
 
     public void unloadCar(Car carToBeUnloaded){
         if (!getRampIsDown()) {
             throw new RampIsNotDownException("The transporters' ramp is not down");
-        } else if (!loadedCars.contains(carToBeUnloaded)) {
-            throw new CarIsNotLoadedException("The car is not loaded on the Transporter.");
-        } else if (loadedCars.lastElement() == carToBeUnloaded) {
-            loadedCars.pop();
-            carToBeUnloaded.setCoordsForUnloadedCar(getY(), getX());
-        } 
-    }
-
-    private boolean carIsInRange(Car carToBeLoaded) {
-        double carX = carToBeLoaded.getX().doubleValue();
-        double carY = carToBeLoaded.getY().doubleValue();
-
-        double transporterX = this.getX().doubleValue();
-        double transporterY = this.getY().doubleValue();
-
-        boolean carXIsInRange = (carX <= transporterX + maxRangeForLoadingCars && carX >= transporterX - maxRangeForLoadingCars);
-        boolean carYIsInRange = (carY <= transporterY + maxRangeForLoadingCars && carY >= transporterY - maxRangeForLoadingCars);
-        boolean carIsInRange = carXIsInRange && carYIsInRange;
-        
-        return carIsInRange;
+        }
+        carStorage.unLoadCar(carToBeUnloaded, truck);
     }
 }
