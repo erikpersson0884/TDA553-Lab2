@@ -11,15 +11,6 @@ public abstract class Car extends Vehicle implements ICar {
         super(modelName, enginePower, color, nrDoors, x, y);
     }
 
-    public void gas(double amount) {
-        // Can only gas between 0 and 1
-        if (0 <= amount && amount <= 1) {
-            incrementSpeed(amount);
-        } else {
-            throw new IllegalArgumentException("Only values in range [0-1] are accepted.");
-        }
-    }
-
     public void loadCar(){
         setX(null);
         setY(null);

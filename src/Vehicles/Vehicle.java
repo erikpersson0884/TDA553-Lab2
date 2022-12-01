@@ -112,7 +112,7 @@ public abstract class Vehicle extends Positionable implements Movable, IVehicle 
         return speedIsIncreasing && speedIsNotNegative;
     }
 
-    protected void incrementSpeed(double amount) {
+    private void incrementSpeed(double amount) {
         double newSpeed = calcNewIncreasedSpeed(amount);
         boolean validSpeed = newIncreasedSpeedIsValid(newSpeed);
 
@@ -128,7 +128,14 @@ public abstract class Vehicle extends Positionable implements Movable, IVehicle 
             setCurrentSpeed(newSpeed);
     }
 
-    public abstract void gas(double amount);
+    public void gas(double amount){
+        // Can only gas between 0 and 1
+        if (0 <= amount && amount <= 1){
+            incrementSpeed(amount);
+        } else {
+            throw new IllegalArgumentException("Only values in range [0-1] are accepted.");
+        }
+    }
 
     public void brake(double amount) {
         // Can only brake between 0 and 1

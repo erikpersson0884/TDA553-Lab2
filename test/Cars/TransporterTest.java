@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import CustomExceptions.CarIsAlreadyLoadedException;
 import CustomExceptions.CarStorageFullException;
-import Vehicles.Cars.Car;
+
 import Vehicles.Cars.ICar;
 import Vehicles.Cars.Saab95;
 import Vehicles.Cars.Volvo240;

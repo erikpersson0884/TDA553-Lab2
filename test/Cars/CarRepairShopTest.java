@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import Buildings.CarRepairShop;
 import CustomExceptions.*;
-import Vehicles.Cars.Car;
+
 import Vehicles.Cars.ICar;
 import Vehicles.Cars.Volvo240;
 

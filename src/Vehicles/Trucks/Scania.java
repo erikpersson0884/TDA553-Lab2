@@ -7,7 +7,7 @@ import Ramps.TruckRamp;
 import Utility.IPositionable;
 import Vehicles.Movable;
 
-public class Scania implements ITruck, Movable, IPositionable{
+public class Scania implements Movable, IPositionable{
     //private Ramp ramp;
     private Truck truck;
     private int maxAngle;
@@ -86,11 +86,5 @@ public class Scania implements ITruck, Movable, IPositionable{
     public void lowerRampToMin() {
         if (getCurrentSpeed() == 0)
             truck.getRamp().lowerRamp(truck.getRamp().getMinAngle());
-    }
-
-    @Override
-    public boolean rampIsInCorrectPosistion() {
-        // TODO Auto-generated method stub
-        return false;
     }
 }

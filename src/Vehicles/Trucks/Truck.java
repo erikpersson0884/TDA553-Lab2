@@ -17,16 +17,12 @@ public class Truck extends Vehicle {
     protected double speedFactor() {
         return getEnginePower() * 0.01;
     }
-
+    
     @Override
     // Methods for changing the speed of a Truck
     public void gas(double amount) {
-        // Can only gas between 0 and 1
-        if (!(0 <= amount && amount <= 1)) {
-            throw new IllegalArgumentException("Only values in range [0-1] are accepted.");
-        } else if (getRamp().rampIsInCorrectPosistionWhenMoving()) {
-            incrementSpeed(amount);
-        }
+        getRamp().rampIsInCorrectPosistionWhenMoving();
+        super.gas(amount);
     }
 
     public Ramp getRamp() {
@@ -44,4 +40,5 @@ public class Truck extends Vehicle {
         if (getCurrentSpeed() == 0)
             ramp.lowerRampToMin();
     }
+
 }

@@ -26,5 +26,7 @@ public class TurboCar extends Car{
         
         return getEnginePower() * 0.01 * turbo;
     }
+
+
     
 }
