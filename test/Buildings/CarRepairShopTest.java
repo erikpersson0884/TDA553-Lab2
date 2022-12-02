@@ -4,6 +4,7 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.Color;
+import java.math.BigDecimal;
 
 import org.junit.After;
 import org.junit.Before;
@@ -58,7 +59,7 @@ public class CarRepairShopTest {
         carRepairShop.loadCar(myVolvo);
         carRepairShop.unloadCar(myVolvo);
 
-        assertTrue(!((myVolvo.getX() == null) && (myVolvo.getY() == null)));
+        assertTrue(!((myVolvo.getX() == Double.NaN) && (myVolvo.getY() == Double.NaN)));
     }
 
     @Test
@@ -70,7 +71,5 @@ public class CarRepairShopTest {
                 carRepairShop.loadCar(new Volvo240(0, null, 0, 0));
             }
         });
-
     }
-
 }

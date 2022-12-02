@@ -6,14 +6,13 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.Color;
-import java.math.BigDecimal;
+
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import CustomExceptions.*;
-import Ramps.RampState;
 import Vehicles.Cars.ICar;
 import Vehicles.Cars.Saab95;
 import Vehicles.Cars.Volvo240;
@@ -84,22 +83,25 @@ public class TransporterTest {
 
     @Test
     public void moving_and_turning_the_car_to_its_original_position_should_result_in_its_original_position() {
-        BigDecimal prevX = Transporter.getX();
-        BigDecimal prevY = Transporter.getY();
+        double prevX = Transporter.getX();
+        double prevY = Transporter.getY();
 
         Transporter.gas(0.5);
 
         Transporter.turnRight();
 
         Transporter.move();
-
         for (int i = 0; i < 4; i++) {
             Transporter.turnLeft();
         }
-
         Transporter.move();
 
-        assertTrue(BigDecimal.ZERO.equals(prevX) && BigDecimal.ZERO.equals(prevY));
+
+        double[] prevPosition = {prevX, prevY};
+        double[] currentPosition = {Transporter.getX(), Transporter.getY()};
+
+        assertEquals(prevPosition, currentPosition);
+        //assertTrue(Transporter.getX() == prevX && Transporter.getY() == prevY);
     }
 
     @Test
@@ -160,7 +162,7 @@ public class TransporterTest {
         System.out.println(Transporter.getRampIsInDrivingPosition());
         Transporter.unLoadCar(myVolvo);
 
-        assertFalse(prevX == myVolvo.getX().doubleValue());
+        assertFalse(prevX == myVolvo.getX());
     }
 
 }

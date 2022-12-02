@@ -5,7 +5,7 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.Color;
-import java.math.BigDecimal;
+
 
 import org.junit.After;
 import org.junit.Before;
@@ -78,8 +78,8 @@ public class ScaniaTest {
 
     @Test
     public void moving_and_turning_the_car_to_its_original_position_should_result_in_its_original_position() {
-        BigDecimal prevX = myScania.getX();
-        BigDecimal prevY = myScania.getY();
+        double prevX = myScania.getX();
+        double prevY = myScania.getY();
 
         myScania.gas(0.5);
 
@@ -92,8 +92,7 @@ public class ScaniaTest {
         }
 
         myScania.move();
-
-        assertTrue(BigDecimal.ZERO.equals(prevX) && BigDecimal.ZERO.equals(prevY));
+        assertTrue(myScania.getX() == prevX && myScania.getY() == prevY);
     }
 
     @Test

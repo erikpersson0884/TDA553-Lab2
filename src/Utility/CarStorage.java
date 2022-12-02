@@ -1,6 +1,7 @@
 package Utility;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Stack;
 
@@ -54,10 +55,10 @@ public class CarStorage implements ICarStorage {
             }      
                    
             ((Stack<ICar>) loadedCars).pop();
-            carToBeUnloaded.setCoordsForUnloadedCar(currentPositionableObject.getY(), currentPositionableObject.getX());
+            carToBeUnloaded.setCoordsForUnloadedCar(new BigDecimal(currentPositionableObject.getY()), new BigDecimal(currentPositionableObject.getX()));
         } else {
                 loadedCars.remove(carToBeUnloaded);
-                carToBeUnloaded.setCoordsForUnloadedCar(currentPositionableObject.getX(), currentPositionableObject.getY());
+                carToBeUnloaded.setCoordsForUnloadedCar(new BigDecimal(currentPositionableObject.getX()), new BigDecimal(currentPositionableObject.getY()));
         } 
     }
 }

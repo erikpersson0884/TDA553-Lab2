@@ -1,6 +1,5 @@
 package Ramps;
 
-
 public abstract class Ramp {
     private RampState rampStateWhenDriving;
     private int rampAngle;

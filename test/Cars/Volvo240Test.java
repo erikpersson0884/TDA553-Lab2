@@ -4,8 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
-import java.math.BigDecimal;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +15,7 @@ public class Volvo240Test {
 
     @Before
     public void createTestVolvo240() {
-        myVolvo = new Volvo240(0, null, 0, 0);
+        myVolvo = new Volvo240(100, null, 0, 0);
     }
 
     @After
@@ -77,8 +75,8 @@ public class Volvo240Test {
 
     @Test
     public void moving_and_turning_the_car_to_its_original_position_should_result_in_its_original_position() {
-        BigDecimal prevX = myVolvo.getX();
-        BigDecimal prevY = myVolvo.getY();
+        double prevX = myVolvo.getX();
+        double prevY = myVolvo.getY();
 
         myVolvo.gas(0.5);
 
@@ -91,7 +89,6 @@ public class Volvo240Test {
         }
 
         myVolvo.move();
-
-        assertTrue(BigDecimal.ZERO.equals(prevX) && BigDecimal.ZERO.equals(prevY));
+        assertTrue(myVolvo.getX() == prevX && myVolvo.getY() == prevY);
     }
 }

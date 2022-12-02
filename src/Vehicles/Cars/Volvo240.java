@@ -48,12 +48,12 @@ public class Volvo240 implements ICar, Movable {
     }
 
     @Override
-    public BigDecimal getX() {
+    public double getX() {
         return trimCar.getX();
     }
 
     @Override
-    public BigDecimal getY() {
+    public double getY() {
         return trimCar.getY();
     }
 

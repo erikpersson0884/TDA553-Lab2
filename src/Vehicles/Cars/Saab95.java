@@ -47,12 +47,12 @@ public class Saab95 implements ICar, Movable {
     }
 
     @Override
-    public BigDecimal getX() {
+    public double getX() {
         return turboCar.getX();
     }
 
     @Override
-    public BigDecimal getY() {
+    public double getY() {
         return turboCar.getY();
     }
 

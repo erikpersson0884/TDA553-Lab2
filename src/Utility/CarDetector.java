@@ -11,11 +11,11 @@ public class CarDetector {
      * @return boolean
      */
     public static boolean carIsInRange(ICar carToBeDetected, Positionable currentPositionableObject, int maxRangeForDetectingCars) {
-        double carX = carToBeDetected.getX().doubleValue();
-        double carY = carToBeDetected.getY().doubleValue();
+        double carX = carToBeDetected.getX();
+        double carY = carToBeDetected.getY();
 
-        double currentPositionableObjectX = currentPositionableObject.getX().doubleValue();
-        double ccurrentPositionableObjectY= currentPositionableObject.getY().doubleValue();
+        double currentPositionableObjectX = currentPositionableObject.getX();
+        double ccurrentPositionableObjectY= currentPositionableObject.getY();
 
         boolean carXIsInRange = (carX <= currentPositionableObjectX + maxRangeForDetectingCars 
                                 && carX >= currentPositionableObjectX - maxRangeForDetectingCars);

@@ -31,11 +31,11 @@ public class Scania implements Movable, IPositionable {
         return truck.getEnginePower();
     }
 
-    public BigDecimal getX() {
+    public double getX() {
         return truck.getX();
     }
 
-    public BigDecimal getY() {
+    public double getY() {
         return truck.getY();
     }
 

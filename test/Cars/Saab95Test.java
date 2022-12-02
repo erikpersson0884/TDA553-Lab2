@@ -3,6 +3,7 @@ package Cars;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.Color;
 import java.math.BigDecimal;
@@ -78,8 +79,8 @@ public class Saab95Test {
 
     @Test
     public void moving_and_turning_the_car_to_its_original_position_should_result_in_its_original_position() {
-        BigDecimal prevX = mySaab95.getX();
-        BigDecimal prevY = mySaab95.getY();
+        double prevX = mySaab95.getX();
+        double prevY = mySaab95.getY();
 
         mySaab95.gas(0.5);
 
@@ -90,11 +91,13 @@ public class Saab95Test {
         for (int i = 0; i < 4; i++) {
             mySaab95.turnLeft();
         }
-
+ 
         mySaab95.move();
+        assertTrue(BigDecimal.ZERO.equals(BigDecimal.valueOf(prevX))  && BigDecimal.ZERO.equals(BigDecimal.valueOf(prevY))  && BigDecimal.ZERO.equals(BigDecimal.valueOf(mySaab95.getX())) && BigDecimal.ZERO.equals(BigDecimal.valueOf(mySaab95.getY())));
 
-        assertTrue(BigDecimal.ZERO.equals(prevX) && BigDecimal.ZERO.equals(prevY));
 
+        //assertTrue((BigDecimal.valueOf(mySaab95.getX()).compareTo(BigDecimal.valueOf(prevX)) == 0) && BigDecimal.valueOf(mySaab95.getY()).compareTo(BigDecimal.valueOf(prevY)) == 0);
+        //assertTrue(mySaab95.getX() == prevX && mySaab95.getY() == prevY);
     }
 
 }

@@ -33,11 +33,11 @@ public class Transporter implements Movable, IPositionable {
         return truck.getEnginePower();
     }
 
-    public BigDecimal getX() {
+    public double getX() {
         return truck.getX();
     }
 
-    public BigDecimal getY() {
+    public double getY() {
         return truck.getY();
     }
     
@@ -59,10 +59,6 @@ public class Transporter implements Movable, IPositionable {
 
     public void brake(double amount) {
         truck.brake(amount);
-    }
-
-    private double getSpeedFactor() {
-        return truck.speedFactor();
     }
 
     public void raiseRamp() {

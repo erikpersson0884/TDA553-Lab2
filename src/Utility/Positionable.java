@@ -20,19 +20,39 @@ public abstract class Positionable implements IPositionable {
     }
 
     // Methods for getters and setters
-    public BigDecimal getX() {
+
+    private BigDecimal getBigDecimalX() {
         return x;
     }
 
-    public void setX(BigDecimal x) {
+    @Override
+    public double getX() {
+        return getBigDecimalX().doubleValue();
+    }
+
+    protected void setX(double x) {
+        setX(BigDecimal.valueOf(x));
+    }
+
+    private void setX(BigDecimal x) {
         this.x = x;
     }
 
-    public BigDecimal getY() {
+    private BigDecimal getBigDecimalY() {
         return y;
     }
 
-    public void setY(BigDecimal y) {
+    @Override
+    public double getY() {
+        return getBigDecimalY().doubleValue();
+    }
+
+    protected void setY(double y) {
+        
+        setY(BigDecimal.valueOf(y));
+    }
+
+    private void setY(BigDecimal y) {
         this.y = y;
     }
 

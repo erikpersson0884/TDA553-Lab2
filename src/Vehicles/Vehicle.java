@@ -69,11 +69,11 @@ public abstract class Vehicle extends Positionable implements Movable, IVehicle 
         double changeInX = Math.cos(Math.toRadians(getDirection())) * getCurrentSpeed();
         double changeInY = Math.sin(Math.toRadians(getDirection())) * getCurrentSpeed();
 
-        BigDecimal newX = getX().add(BigDecimal.valueOf(changeInX));
-        BigDecimal newY = getY().add(BigDecimal.valueOf(changeInY));
+        BigDecimal newX = new BigDecimal(getX()).add(BigDecimal.valueOf(changeInX));
+        BigDecimal newY = new BigDecimal(getY()).add(BigDecimal.valueOf(changeInY));
 
-        setX(newX);
-        setY(newY);
+        setX(newX.doubleValue());
+        setY(newY.doubleValue());
     }
 
     @Override

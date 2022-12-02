@@ -12,13 +12,14 @@ public abstract class Car extends Vehicle implements ICar {
     }
 
     public void loadCar() {
-        setX(null);
-        setY(null);
+        setX(Double.NaN);
+        setY(Double.NaN);
     }
 
     public void setCoordsForUnloadedCar(BigDecimal transporterX, BigDecimal transporterY) {
         BigDecimal spaceFromTransporter = new BigDecimal(20);
-        setX(transporterX.add(spaceFromTransporter));
-        setY(transporterY.add(spaceFromTransporter));
+        
+        setX(transporterX.add(spaceFromTransporter).doubleValue());
+        setY(transporterY.add(spaceFromTransporter).doubleValue());
     }
 }
