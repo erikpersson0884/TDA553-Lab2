@@ -19,7 +19,7 @@ public class Saab95Test {
 
     @Before
     public void createTestSaab95() {
-        mySaab95 = new Saab95(500, Color.red, 0, 0);
+        mySaab95 = new Saab95(500, Color.red, 2, 2);
     }
 
     @After
@@ -93,11 +93,8 @@ public class Saab95Test {
         }
  
         mySaab95.move();
-        assertTrue(BigDecimal.ZERO.equals(BigDecimal.valueOf(prevX))  && BigDecimal.ZERO.equals(BigDecimal.valueOf(prevY))  && BigDecimal.ZERO.equals(BigDecimal.valueOf(mySaab95.getX())) && BigDecimal.ZERO.equals(BigDecimal.valueOf(mySaab95.getY())));
 
-
-        //assertTrue((BigDecimal.valueOf(mySaab95.getX()).compareTo(BigDecimal.valueOf(prevX)) == 0) && BigDecimal.valueOf(mySaab95.getY()).compareTo(BigDecimal.valueOf(prevY)) == 0);
-        //assertTrue(mySaab95.getX() == prevX && mySaab95.getY() == prevY);
+        assertTrue(mySaab95.getX() == prevX && mySaab95.getY() == prevY);
     }
 
 }
