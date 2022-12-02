@@ -25,6 +25,5 @@ public class CarRepairShop extends Positionable {
 
     public void unloadCar(ICar carToBeUnloaded) {
         carStorage.unLoadCar(carToBeUnloaded, this);
-
     }
 }

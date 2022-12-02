@@ -1,12 +1,10 @@
 package Vehicles.Trucks;
 
 import java.awt.Color;
-import java.math.BigDecimal;
 
-import Ramps.TruckRamp;
+import Ramps.StandardTruckRamp;
 import Utility.IPositionable;
 import Vehicles.Movable;
-import Ramps.RampState;
 
 public class Scania implements Movable, IPositionable {
     private Truck truck;
@@ -14,7 +12,7 @@ public class Scania implements Movable, IPositionable {
 
     public Scania(double enginePower, Color color, double x, double y) {
         this.maxAngle = 70;
-        this.truck = new Truck("Scania", enginePower, color, 2, x, y, maxAngle, new TruckRamp(RampState.DOWN));
+        this.truck = new Truck("Scania", enginePower, color, 2, x, y, maxAngle, new StandardTruckRamp());
     }
 
     // --------- delegated methods -----------------
@@ -80,12 +78,12 @@ public class Scania implements Movable, IPositionable {
 
     public void raiseRampToMax() {
         if (getCurrentSpeed() == 0)
-            truck.getRamp().raiseRamp(truck.getRamp().getMaxAngle());
+            truck.raiseRampToMax();
     }
 
     // when no argument is thrown sets
     public void lowerRampToMin() {
         if (getCurrentSpeed() == 0)
-            truck.getRamp().lowerRamp(truck.getRamp().getMinAngle());
+            truck.lowerRampToMin();
     }
 }

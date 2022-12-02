@@ -7,7 +7,7 @@ import Vehicles.Vehicle;
 
 public abstract class Car extends Vehicle implements ICar {
 
-    public Car(String modelName, double enginePower, Color color, int nrDoors, double x, double y) {
+    Car(String modelName, double enginePower, Color color, int nrDoors, double x, double y) {
         super(modelName, enginePower, color, nrDoors, x, y);
     }
 

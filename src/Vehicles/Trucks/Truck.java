@@ -9,8 +9,7 @@ import Vehicles.Vehicle;
 public class Truck extends Vehicle {
     private Ramp ramp;
 
-    public Truck(String modelname, double enginePower, Color color, int nrDoors, double x, double y, int maxAngle,
-            Ramp ramp) {
+    Truck(String modelname, double enginePower, Color color, int nrDoors, double x, double y, int maxAngle, Ramp ramp) {
         super(modelname, enginePower, color, nrDoors, x, y);
         this.ramp = ramp;
     }

@@ -5,7 +5,7 @@ import java.awt.*;
 public class TurboCar extends Car {
     private boolean turboOn;
 
-    public TurboCar(String name, double enginePower, Color color, int nrDoors, double x, double y) {
+    TurboCar(String name, double enginePower, Color color, int nrDoors, double x, double y) {
         super(name, enginePower, color, nrDoors, x, y);
         turboOn = false;
     }

@@ -1,16 +1,52 @@
 1. Your design probably has a type called something like Car or Vehicle that is a supertype to both Volvo and Scania. 
 What is the contract for gas() and brake() in this type? 
+
+- Gas and brake are methods that originate from the interface IVehicle. Gas takes in a double amount and returns nothing (void), 
+same for brake as long as the amount is in range [0-1]. Then Vehicle is the abstract class that implements IVehicle. 
+Vehicle is the class where we represent our movable cars and trucks. We have a Car subclass and then a Truck subclass. 
+
+- For Car there are two subclasses, one for a car with turbo (TurboCar) and one for a car that is trimmed (TrimCar). 
+Both follow the contracts as they use the inherited gas method. 
+
+-It is only in Truck where we override the gas method to adapt the method because of the fact that the trucks have a ramp, 
+which changes in when it is able to use the original gas method.
+
 Do the implementations of gas() and brake() in both Volvo and Scania follow this contract? 
+
+- Volvo gets the implementation of gas from TrimCar, Scania gets the implementation of gas from Truck.
+And the implementation of the methods in TrimCar, Truck and Turbocar follow the principle since the methods accept the same values, do the same
+actions depending on the parameter and return nothing (void).
+
 Does your design follow the Liskov Substitution Principle?
 
+-Yes, our design has tried to follow the Liskov Substitution Principle as close as possible. Because the subtypes methods accepts the same values as the supertype
+do the same actions (and maybe a little more) depending on the parameter and return nothing (void).
 
 
 2. How did you handle duplicated code between Scania, the car transporters and the repair shops? 
 Explain how you decided when to use subclassing and when to use composition and delegation.
 
+- We made different classes to handle different problems. Firstly, we added a CarDetector class to detect nearby cars. 
+Then we added a CarStorage class to handle storing the cars, where we used the CarDetector's method by a static method call.
+
+- Between the Scania and the car transporter they used the Truck class by delegation. Where they have an attribute truck, 
+then we create a new Truck object corresponding to its own class in the constructor. This is because they are both trucks. The only different behaviour is in their ramp. 
+When we create a truck we define which type of ramp belongs to which truck. The car transporter has a transporterramp and the Scania truck has a standard truck ramp. 
+Thoose ramps are subclasses of an abstract class Ramp as they share some code. The only difference is in the correct ramp state when driving. 
+For the car transporter it is up and then the Scania truck is down.
+
+- Both the car transporter and the repair shop have a CarStorage which they delegate to. The difference in how they act when loading and unloading the cars. 
+The car transporter follows a stack structure. Where the first car in is supposed to come last out. Which is reflecting in how it works in real life. 
+The car repair shop has a "normal" list, where it does not matter in what order the car comes in at the repair shop. 
+As there can be different times where the car is done being repaired. In the CarStorage class we have a way of determining if the one who uses it is using
+a stack or a generic list. The repair shop uses the regular method for loading and unloading the car coming from CarStorage. 
+But in the car transporter we check that ramp is in the correct state for loading and unloading the car, as it can not be loaded when the ramp is not down.
+We decided to use subclassing in the stable "is-a" relations. For composition and delegation it was mainly to not be restricted by the contracts given by inheritance.
 
 
 3. Did you need to modify the design from lab 1 in order to make these extensions? 
 If so, how could you have noticed that your design from Lab 1 did not follow the Open-Closed Principle before you started working on Lab 2?
 
-In lab1 we only expected cars to be added, so we needed to do some modifications. 
+- In lab1 we only expected cars to be added, so we needed to do some modifications. We changed the hierarchy both to fit with 
+the new design and also according to feedback from lab1. There was not much composition and delegation, 
+which made it more restrictive in how we created the classes if we hade some duplicated code.

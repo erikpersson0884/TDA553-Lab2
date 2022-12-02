@@ -4,7 +4,6 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import java.awt.Color;
-import java.math.BigDecimal;
 
 import org.junit.After;
 import org.junit.Before;

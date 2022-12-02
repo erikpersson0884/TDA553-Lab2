@@ -1,8 +1,8 @@
 package Cars;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Before;
@@ -74,8 +74,26 @@ public class Volvo240Test {
     }
 
     @Test
-    public void moving_and_turning_the_car_to_its_original_position_should_result_in_its_original_position() {
+    public void moving_and_turning_the_car_to_its_original_position_should_result_in_same_x_position() {
         double prevX = myVolvo.getX();
+
+        myVolvo.gas(0.5);
+
+        myVolvo.turnRight();
+
+        myVolvo.move();
+
+        for (int i = 0; i < 4; i++) {
+            myVolvo.turnLeft();
+        }
+
+        myVolvo.move();
+    
+        assertEquals(prevX, myVolvo.getX(), 0.01);
+    }
+
+    @Test
+    public void moving_and_turning_the_car_to_its_original_position_should_result_in_same_y_position() {
         double prevY = myVolvo.getY();
 
         myVolvo.gas(0.5);
@@ -89,6 +107,7 @@ public class Volvo240Test {
         }
 
         myVolvo.move();
-        assertTrue(myVolvo.getX() == prevX && myVolvo.getY() == prevY);
+    
+        assertEquals(prevY, myVolvo.getY(), 0.01);
     }
 }

@@ -1,7 +1,6 @@
 package Vehicles.Trucks;
 
 import java.awt.Color;
-import java.math.BigDecimal;
 import java.util.Stack;
 
 import CustomExceptions.*;
@@ -17,9 +16,9 @@ public class Transporter implements Movable, IPositionable {
 
     private CarStorage carStorage;
 
-    public Transporter(double enginePower, Color color, double x, double y) {
+    public Transporter(double enginePower, Color color, int nrDoors, double x, double y) {
         maxAngle = 0;
-        truck = new Truck("transporter", enginePower, color, 0, x, y, maxAngle, new TransporterRamp());
+        truck = new Truck("Transporter", enginePower, color, nrDoors, x, y, maxAngle, new TransporterRamp());
         carStorage = new CarStorage(7, new Stack<ICar>(), 30);
     }
 
@@ -40,7 +39,7 @@ public class Transporter implements Movable, IPositionable {
     public double getY() {
         return truck.getY();
     }
-    
+
     public boolean getRampIsInDrivingPosition() {
         return truck.getRamp().rampIsInDrivingPosition();
     }
@@ -91,6 +90,6 @@ public class Transporter implements Movable, IPositionable {
         } else {
             carStorage.unLoadCar(carToBeUnloaded, truck);
         }
-        
+
     }
 }

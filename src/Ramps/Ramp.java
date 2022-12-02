@@ -7,7 +7,7 @@ public abstract class Ramp {
     private final int MIN_ANGLE;
     private RampState rampState;
 
-    public Ramp(int MAX_ANGLE, RampState rampStateWhenDriving) {
+    Ramp(int MAX_ANGLE, RampState rampStateWhenDriving) {
         this.MAX_ANGLE = MAX_ANGLE;
         this.MIN_ANGLE = 0;
         this.rampAngle = 0;

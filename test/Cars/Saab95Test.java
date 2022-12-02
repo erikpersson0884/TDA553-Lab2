@@ -2,11 +2,9 @@ package Cars;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
-import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.Color;
-import java.math.BigDecimal;
 
 import org.junit.After;
 import org.junit.Before;
@@ -19,7 +17,7 @@ public class Saab95Test {
 
     @Before
     public void createTestSaab95() {
-        mySaab95 = new Saab95(500, Color.red, 2, 2);
+        mySaab95 = new Saab95(500, Color.red, 0, 0);
     }
 
     @After
@@ -78,8 +76,26 @@ public class Saab95Test {
     }
 
     @Test
-    public void moving_and_turning_the_car_to_its_original_position_should_result_in_its_original_position() {
+    public void moving_and_turning_the_car_to_its_original_position_should_result_in_same_x_position() {
         double prevX = mySaab95.getX();
+
+        mySaab95.gas(0.5);
+
+        mySaab95.turnRight();
+
+        mySaab95.move();
+
+        for (int i = 0; i < 4; i++) {
+            mySaab95.turnLeft();
+        }
+
+        mySaab95.move();
+    
+        assertEquals(prevX, mySaab95.getX(), 0.01);
+    }
+
+    @Test
+    public void moving_and_turning_the_car_to_its_original_position_should_result_in_same_y_position() {
         double prevY = mySaab95.getY();
 
         mySaab95.gas(0.5);
@@ -91,10 +107,9 @@ public class Saab95Test {
         for (int i = 0; i < 4; i++) {
             mySaab95.turnLeft();
         }
- 
+
         mySaab95.move();
-
-        assertTrue(mySaab95.getX() == prevX && mySaab95.getY() == prevY);
+    
+        assertEquals(prevY, mySaab95.getY(), 0.01);
     }
-
 }

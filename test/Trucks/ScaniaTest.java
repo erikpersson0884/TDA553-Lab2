@@ -1,5 +1,6 @@
 package Trucks;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
@@ -77,8 +78,26 @@ public class ScaniaTest {
     }
 
     @Test
-    public void moving_and_turning_the_car_to_its_original_position_should_result_in_its_original_position() {
+    public void moving_and_turning_the_car_to_its_original_position_should_result_in_same_x_position() {
         double prevX = myScania.getX();
+
+        myScania.gas(0.5);
+
+        myScania.turnRight();
+
+        myScania.move();
+
+        for (int i = 0; i < 4; i++) {
+            myScania.turnLeft();
+        }
+
+        myScania.move();
+    
+        assertEquals(prevX, myScania.getX(), 0.01);
+    }
+
+    @Test
+    public void moving_and_turning_the_car_to_its_original_position_should_result_in_same_y_position() {
         double prevY = myScania.getY();
 
         myScania.gas(0.5);
@@ -92,7 +111,8 @@ public class ScaniaTest {
         }
 
         myScania.move();
-        assertTrue(myScania.getX() == prevX && myScania.getY() == prevY);
+    
+        assertEquals(prevY, myScania.getY(), 0.01);
     }
 
     @Test

@@ -23,7 +23,7 @@ public class TransporterTest {
 
     @Before
     public void createTestTransporter() {
-        Transporter = new Transporter(500, Color.BLACK, 0, 0);
+        Transporter = new Transporter(500, Color.BLACK, 2, 0, 0);
     }
 
     @After
@@ -82,8 +82,26 @@ public class TransporterTest {
     }
 
     @Test
-    public void moving_and_turning_the_car_to_its_original_position_should_result_in_its_original_position() {
+    public void moving_and_turning_the_car_to_its_original_position_should_result_in_same_x_position() {
         double prevX = Transporter.getX();
+
+        Transporter.gas(0.5);
+
+        Transporter.turnRight();
+
+        Transporter.move();
+
+        for (int i = 0; i < 4; i++) {
+            Transporter.turnLeft();
+        }
+
+        Transporter.move();
+    
+        assertEquals(prevX, Transporter.getX(), 0.01);
+    }
+
+    @Test
+    public void moving_and_turning_the_car_to_its_original_position_should_result_in_same_y_position() {
         double prevY = Transporter.getY();
 
         Transporter.gas(0.5);
@@ -91,17 +109,14 @@ public class TransporterTest {
         Transporter.turnRight();
 
         Transporter.move();
+
         for (int i = 0; i < 4; i++) {
             Transporter.turnLeft();
         }
+
         Transporter.move();
-
-
-        double[] prevPosition = {prevX, prevY};
-        double[] currentPosition = {Transporter.getX(), Transporter.getY()};
-
-        assertEquals(prevPosition, currentPosition);
-        //assertTrue(Transporter.getX() == prevX && Transporter.getY() == prevY);
+    
+        assertEquals(prevY, Transporter.getY(), 0.01);
     }
 
     @Test
@@ -157,9 +172,8 @@ public class TransporterTest {
         while (Transporter.getCurrentSpeed() > 0) {
             Transporter.brake(1);
         }
-        System.out.println(Transporter.getCurrentSpeed()); 
+
         Transporter.lowerRamp();
-        System.out.println(Transporter.getRampIsInDrivingPosition());
         Transporter.unLoadCar(myVolvo);
 
         assertFalse(prevX == myVolvo.getX());
