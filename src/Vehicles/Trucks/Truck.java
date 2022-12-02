@@ -2,15 +2,16 @@ package Vehicles.Trucks;
 
 import java.awt.Color;
 
-import Vehicles.Ramp;
+import CustomExceptions.RampIsNotInCorrectPositionException;
+import Ramps.Ramp;
 import Vehicles.Vehicle;
 
-public class Truck extends Vehicle implements ITruck {
+public class Truck extends Vehicle {
     private Ramp ramp;
 
-    public Truck(String modelname, double enginePower, Color color, int nrDoors, double x, double y, int maxAngle) {
+    Truck(String modelname, double enginePower, Color color, int nrDoors, double x, double y, int maxAngle, Ramp ramp) {
         super(modelname, enginePower, color, nrDoors, x, y);
-        this.ramp = new Ramp(maxAngle);
+        this.ramp = ramp;
     }
 
     @Override
@@ -18,20 +19,14 @@ public class Truck extends Vehicle implements ITruck {
         return getEnginePower() * 0.01;
     }
 
-	@Override
-	public boolean rampIsInCorrectPosistion() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
     @Override
     // Methods for changing the speed of a Truck
     public void gas(double amount) {
-        // Can only gas between 0 and 1
-        if (!(0 <= amount && amount <= 1)) {
-            throw new IllegalArgumentException("Only values in range [0-1] are accepted.");
-        } else if (rampIsInCorrectPosistion()) {
-            incrementSpeed(amount);
+        if (!getRamp().rampIsInDrivingPosition()) {
+            throw new RampIsNotInCorrectPositionException("The ramp is not in correct position when moving");
+        } 
+        else {
+            super.gas(amount);
         }
     }
 
@@ -50,4 +45,5 @@ public class Truck extends Vehicle implements ITruck {
         if (getCurrentSpeed() == 0)
             ramp.lowerRampToMin();
     }
+
 }

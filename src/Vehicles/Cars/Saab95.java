@@ -1,32 +1,63 @@
 package Vehicles.Cars;
+
 import java.awt.*;
 
+import java.math.BigDecimal;
 
-public class Saab95 extends Car{
-    
-    private boolean turboOn;
+import Vehicles.Movable;
 
-    
-    public Saab95(double enginePower, Color color, double x, double y){
-        super("Saab95", enginePower, color, 2, x, y);
-	    turboOn = false;
-    }
-    
-    // Methods
+public class Saab95 implements ICar, Movable {
+    private TurboCar turboCar;
 
-    public void setTurboOn(){
-	    turboOn = true;
+    public Saab95(double enginePower, Color color, double x, double y) {
+        this.turboCar = new TurboCar("Saab95", enginePower, color, 2, x, y);
     }
 
-    public void setTurboOff(){
-	    turboOn = false;
-    }
-    
     @Override
-    protected double speedFactor(){
-        double turbo = 1;
-        if(turboOn) turbo = 1.3;
-        
-        return getEnginePower() * 0.01 * turbo;
+    public void move() {
+        turboCar.move();
+    }
+
+    @Override
+    public void turnLeft() {
+        turboCar.turnLeft();
+    }
+
+    @Override
+    public void turnRight() {
+        turboCar.turnRight();
+    }
+
+    @Override
+    public void gas(double amount) {
+        turboCar.gas(amount);
+    }
+
+    @Override
+    public void brake(double amount) {
+        turboCar.brake(amount);
+    }
+
+    public double getEnginePower() {
+        return turboCar.getEnginePower();
+    }
+
+    public double getCurrentSpeed() {
+        return turboCar.getCurrentSpeed();
+    }
+
+    @Override
+    public double getX() {
+        return turboCar.getX();
+    }
+
+    @Override
+    public double getY() {
+        return turboCar.getY();
+    }
+
+    @Override
+    public void setCoordsForUnloadedCar(BigDecimal transporterX, BigDecimal transporterY) {
+        turboCar.setCoordsForUnloadedCar(transporterX, transporterY);
     }
 }

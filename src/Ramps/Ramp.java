@@ -1,25 +1,24 @@
-package Vehicles;
+package Ramps;
 
-
-public class Ramp {
+public abstract class Ramp {
+    private RampState rampStateWhenDriving;
     private int rampAngle;
-    private boolean rampIsDown;
     private final int MAX_ANGLE;
     private final int MIN_ANGLE;
+    private RampState rampState;
 
-    public Ramp(int MAX_ANGLE) {
+    Ramp(int MAX_ANGLE, RampState rampStateWhenDriving) {
         this.MAX_ANGLE = MAX_ANGLE;
         this.MIN_ANGLE = 0;
         this.rampAngle = 0;
-        this.rampIsDown = true;
+        this.rampStateWhenDriving = rampStateWhenDriving;
+        this.rampState = rampStateWhenDriving;
     }
-
-    public void setRampIsDown(boolean newRampState) {
-        rampIsDown = newRampState;
+    private void setRampState(RampState newRampState){
+        rampState = newRampState;
     }
-    
-    public boolean getRampIsDown() {
-        return rampIsDown;
+    private RampState getRampState() {
+        return rampState;
     }
 
     public int getMaxAngle() {
@@ -29,18 +28,18 @@ public class Ramp {
     public int getMinAngle() {
         return this.MIN_ANGLE;
     }
-    
-    public int getRampAngle(){
+
+    public int getRampAngle() {
         return rampAngle;
     }
-    
-    private void setRampAngle(int newAngle){
+
+    private void setRampAngle(int newAngle) {
         rampAngle = newAngle;
     }
 
     // raise ramp from current position, can only between [0-70].
 
-    public void raiseRamp(int degrees){
+    public void raiseRamp(int degrees) {
         ensureDegreesIsValidRange(degrees);
 
         int newAngle = getRampAngle() + degrees;
@@ -48,7 +47,7 @@ public class Ramp {
             setRampAngle(newAngle);
         }
 
-        setRampIsDown(true);
+        setRampState(RampState.UP);
     }
 
     // lower ramp from current position, can only between [0-70].
@@ -57,28 +56,38 @@ public class Ramp {
 
         int newAngle = getRampAngle() - degrees;
 
-        if  (MIN_ANGLE < degrees && newAngle >= MIN_ANGLE) {
+        if (MIN_ANGLE < degrees && newAngle >= MIN_ANGLE) {
             setRampAngle(newAngle);
         }
-        
+
         if (getRampAngle() == MIN_ANGLE) {
-            setRampIsDown(true);
+        setRampState(RampState.DOWN);
         }
     }
 
     public void raiseRampToMax() {
         rampAngle = MAX_ANGLE;
-        rampIsDown = false;
+        setRampState(RampState.UP);
     }
 
     public void lowerRampToMin() {
         rampAngle = MIN_ANGLE;
-        rampIsDown = true;
+        setRampState(RampState.DOWN);
     }
 
-     private void ensureDegreesIsValidRange(int degrees) {
-        if (degrees < MIN_ANGLE || degrees > MAX_ANGLE){
+    private void ensureDegreesIsValidRange(int degrees) {
+        if (degrees < MIN_ANGLE || degrees > MAX_ANGLE) {
             throw new IllegalArgumentException("Degrees must be in the interval [0-maxAngle]");
         }
     }
+
+    public boolean rampIsInDrivingPosition() {
+        getRampState();
+        if (getRampState() == rampStateWhenDriving){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 }

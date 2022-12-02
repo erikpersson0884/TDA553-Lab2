@@ -1,28 +1,27 @@
 package Vehicles.Trucks;
 
 import java.awt.Color;
-import java.math.BigDecimal;
 import java.util.Stack;
 
 import CustomExceptions.*;
+import Ramps.TransporterRamp;
 import Utility.CarStorage;
-import Vehicles.Cars.Car;
-import Vehicles.Trucks.Truck;
-import Vehicles.Vehicle;
+import Utility.IPositionable;
+import Vehicles.Movable;
+import Vehicles.Cars.ICar;
 
-public class Transporter{
-  
+public class Transporter implements Movable, IPositionable {
     private Truck truck;
     private int maxAngle;
 
     private CarStorage carStorage;
 
-    public Transporter(double enginePower, Color color, double x, double y){
+    public Transporter(double enginePower, Color color, int nrDoors, double x, double y) {
         maxAngle = 0;
-        truck = new Truck("transporter", enginePower, color, 0, x, y, maxAngle);
-        carStorage = new CarStorage(7, new Stack<Car>(), 30);
+        truck = new Truck("Transporter", enginePower, color, nrDoors, x, y, maxAngle, new TransporterRamp());
+        carStorage = new CarStorage(7, new Stack<ICar>(), 30);
     }
-    
+
     // ------------ delegated methods -------------
 
     public double getCurrentSpeed() {
@@ -32,25 +31,27 @@ public class Transporter{
     public double getEnginePower() {
         return truck.getEnginePower();
     }
-    
-    public BigDecimal getX() {
+
+    public double getX() {
         return truck.getX();
     }
 
-    public BigDecimal getY() {
+    public double getY() {
         return truck.getY();
     }
-    public boolean getRampIsDown() {
-        return truck.getRamp().getRampIsDown();
+
+    public boolean getRampIsInDrivingPosition() {
+        return truck.getRamp().rampIsInDrivingPosition();
     }
-    public void move(){
+
+    public void move() {
         truck.move();
     }
 
-    public void turnLeft(){
+    public void turnLeft() {
         truck.turnLeft();
     }
-    
+
     public void turnRight() {
         truck.turnRight();
     }
@@ -59,44 +60,36 @@ public class Transporter{
         truck.brake(amount);
     }
 
-    protected double getSpeedFactor() {
-        return truck.speedFactor();
+    public void raiseRamp() {
+        truck.raiseRampToMax();
     }
 
-    public void raiseRamp(){
-            truck.raiseRampToMax();
-    }
-
-    public void lowerRamp(){
-            truck.lowerRampToMin();
+    public void lowerRamp() {
+        truck.lowerRampToMin();
     }
 
     // ----------- methods with own implementation ---------
-    
+
     public void gas(double amount) {
-        // Can only gas between 0 and 1
-        if (!(0 <= amount && amount <= 1)) {
-            throw new IllegalArgumentException("Only values in range [0-1] are accepted.");
-        } else if (!truck.getRamp().getRampIsDown()) {
-            truck.incrementSpeed(amount);
+        truck.gas(amount);
+    }
+
+    // -------- Methods for loading cars ----------
+
+    public void loadCar(ICar carToBeLoaded) {
+        if (getRampIsInDrivingPosition()) {
+            throw new RampIsNotInCorrectPositionException("The transporters' ramp is not down");
+        } else {
+            carStorage.loadCar(carToBeLoaded, truck);
         }
     }
 
-    //--------  Methods for loading cars ----------
-
-    public void loadCar(Car carToBeLoaded) {
-        carStorage.loadCar(carToBeLoaded, truck);
-
-        if (!getRampIsDown()) {
-            throw new RampIsNotDownException("The transporters' ramp is not down");
-
+    public void unLoadCar(ICar carToBeUnloaded) {
+        if (getRampIsInDrivingPosition()) {
+            throw new RampIsNotInCorrectPositionException("The transporters' ramp is not down");
+        } else {
+            carStorage.unLoadCar(carToBeUnloaded, truck);
         }
-    }
 
-    public void unloadCar(Car carToBeUnloaded){
-        if (!getRampIsDown()) {
-            throw new RampIsNotDownException("The transporters' ramp is not down");
-        }
-        carStorage.unLoadCar(carToBeUnloaded, truck);
     }
 }

@@ -1,5 +1,4 @@
-package Cars;
-
+package Buildings;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
@@ -10,9 +9,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import Buildings.CarRepairShop;
 import CustomExceptions.*;
-import Vehicles.Cars.Car;
+
+import Vehicles.Cars.ICar;
 import Vehicles.Cars.Volvo240;
 
 public class CarRepairShopTest {
@@ -31,36 +30,35 @@ public class CarRepairShopTest {
 
     @Test
     public void cant_load_car_that_is_already_in_carRepairShop() {
-        Volvo240 myVolvo = new Volvo240(0, null, 0, 0);
-    
-        assertThrows(CarIsAlreadyLoadedException.class, () -> {  
-            carRepairShop.loadCar(myVolvo);  
+        ICar myVolvo = new Volvo240(0, null, 0, 0);
+
+        assertThrows(CarIsAlreadyLoadedException.class, () -> {
+            carRepairShop.loadCar(myVolvo);
             carRepairShop.loadCar(myVolvo);
         });
     }
 
-    @Test 
-    public void cannot_unload_car_thats_not_in_repairShop(){
-        Car myVolvo = new Volvo240(33, Color.blue, 10, 6);
+    @Test
+    public void cannot_unload_car_thats_not_in_repairShop() {
+        ICar myVolvo = new Volvo240(33, Color.blue, 10, 6);
 
         carRepairShop.loadCar(myVolvo);
         carRepairShop.unloadCar(myVolvo);
-        
+
         assertThrows(CarIsNotLoadedException.class, () -> {
             carRepairShop.unloadCar(myVolvo);
         });
 
     }
 
-    
     @Test
     public void car_gets_coordinates_when_unloaded() {
-        Car myVolvo = new Volvo240(33, Color.blue, 10, 6);
+        ICar myVolvo = new Volvo240(33, Color.blue, 10, 6);
 
         carRepairShop.loadCar(myVolvo);
         carRepairShop.unloadCar(myVolvo);
 
-        assertTrue(!((myVolvo.getX() == null) && (myVolvo.getY() == null)));
+        assertTrue(!((myVolvo.getX() == Double.NaN) && (myVolvo.getY() == Double.NaN)));
     }
 
     @Test
@@ -68,11 +66,9 @@ public class CarRepairShopTest {
         int ToManyCarsToLoad = carRepairShop.getMaxCapacity() + 5;
 
         assertThrows(CarStorageFullException.class, () -> {
-            for (int i=0; i < ToManyCarsToLoad; i++) {
-                carRepairShop.loadCar( new Volvo240(0, null, 0, 0));
+            for (int i = 0; i < ToManyCarsToLoad; i++) {
+                carRepairShop.loadCar(new Volvo240(0, null, 0, 0));
             }
         });
-        
     }
-
 }

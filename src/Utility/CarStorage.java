@@ -1,18 +1,19 @@
 package Utility;
 
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Stack;
 
 import CustomExceptions.*;
-import Vehicles.Cars.Car;
+import Vehicles.Cars.ICar;
 
 public class CarStorage implements ICarStorage {
     private int maxCapacity;
-    private List<Car> loadedCars;
+    private List<ICar> loadedCars;
     private int maxRangeForLoadingCars;
 
-    public CarStorage(int maxCapacity, List<Car> loadedCars, int maxRangeForLoadingCars) {
+    public CarStorage(int maxCapacity, List<ICar> loadedCars, int maxRangeForLoadingCars) {
         this.maxCapacity = maxCapacity;
         this.loadedCars = loadedCars;
         this.maxRangeForLoadingCars = maxRangeForLoadingCars;
@@ -27,7 +28,7 @@ public class CarStorage implements ICarStorage {
     }
 
     @Override
-    public void loadCar(Car carToBeLoaded, Positionable currentPositionableObject) {
+    public void loadCar(ICar carToBeLoaded, Positionable currentPositionableObject) {
 
         if (loadedCars.size() >= maxCapacity) {
             throw new CarStorageFullException("The storage is full.");
@@ -37,7 +38,7 @@ public class CarStorage implements ICarStorage {
 
         } else if (CarDetector.carIsInRange(carToBeLoaded, currentPositionableObject, maxRangeForLoadingCars)) {
             if (loadedCars instanceof Stack) {
-                ((Stack<Car>) loadedCars).push(carToBeLoaded);
+                ((Stack<ICar>) loadedCars).push(carToBeLoaded);
             } else {
                 loadedCars.add(carToBeLoaded);
             }
@@ -45,19 +46,19 @@ public class CarStorage implements ICarStorage {
     }
 
     @Override
-    public void unLoadCar(Car carToBeUnloaded, Positionable currentPositionableObject) {
+    public void unLoadCar(ICar carToBeUnloaded, Positionable currentPositionableObject) {
         if (!loadedCars.contains(carToBeUnloaded)) {
             throw new CarIsNotLoadedException("The car is not loaded on the Transporter.");
         } else if (loadedCars instanceof Stack) {
-            if ((((Stack<Car>) loadedCars).lastElement() != carToBeUnloaded)) {
+            if ((((Stack<ICar>) loadedCars).lastElement() != carToBeUnloaded)) {
                 throw new CarIsNotLastException("Car is not last");
             }      
                    
-            ((Stack<Car>) loadedCars).pop();
-            carToBeUnloaded.setCoordsForUnloadedCar(currentPositionableObject.getY(), currentPositionableObject.getX());
+            ((Stack<ICar>) loadedCars).pop();
+            carToBeUnloaded.setCoordsForUnloadedCar(new BigDecimal(currentPositionableObject.getY()), new BigDecimal(currentPositionableObject.getX()));
         } else {
                 loadedCars.remove(carToBeUnloaded);
-                carToBeUnloaded.setCoordsForUnloadedCar(currentPositionableObject.getX(), currentPositionableObject.getY());
+                carToBeUnloaded.setCoordsForUnloadedCar(new BigDecimal(currentPositionableObject.getX()), new BigDecimal(currentPositionableObject.getY()));
         } 
     }
 }

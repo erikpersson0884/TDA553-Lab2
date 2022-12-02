@@ -1,13 +1,11 @@
 package Vehicles;
 
-
 import java.awt.Color;
 import java.math.BigDecimal;
 
 import Utility.Positionable;
 
-
-public abstract class Vehicle extends Positionable implements Movable {
+public abstract class Vehicle extends Positionable implements Movable, IVehicle {
     // Instance variables
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
@@ -27,11 +25,12 @@ public abstract class Vehicle extends Positionable implements Movable {
     }
 
     // Getters and Setters
-
+    @Override
     public double getEnginePower() {
         return enginePower;
     }
 
+    @Override
     public double getCurrentSpeed() {
         return currentSpeed;
     }
@@ -40,6 +39,9 @@ public abstract class Vehicle extends Positionable implements Movable {
         return color;
     }
 
+    public int getNrDoors() {
+        return nrDoors;
+    }
 
     private void setCurrentSpeed(double newSpeed) {
         currentSpeed = newSpeed;
@@ -67,11 +69,11 @@ public abstract class Vehicle extends Positionable implements Movable {
         double changeInX = Math.cos(Math.toRadians(getDirection())) * getCurrentSpeed();
         double changeInY = Math.sin(Math.toRadians(getDirection())) * getCurrentSpeed();
 
-        BigDecimal newX = getX().add(BigDecimal.valueOf(changeInX));
-        BigDecimal newY = getY().add(BigDecimal.valueOf(changeInY));
+        BigDecimal newX = BigDecimal.valueOf(getX() + changeInX);
+        BigDecimal newY = BigDecimal.valueOf(getY() + changeInY);
 
-        setX(newX);
-        setY(newY);
+        setX(newX.doubleValue());
+        setY(newY.doubleValue());
     }
 
     @Override
@@ -112,7 +114,7 @@ public abstract class Vehicle extends Positionable implements Movable {
         return speedIsIncreasing && speedIsNotNegative;
     }
 
-    protected void incrementSpeed(double amount) {
+    private void incrementSpeed(double amount) {
         double newSpeed = calcNewIncreasedSpeed(amount);
         boolean validSpeed = newIncreasedSpeedIsValid(newSpeed);
 
@@ -128,8 +130,17 @@ public abstract class Vehicle extends Positionable implements Movable {
             setCurrentSpeed(newSpeed);
     }
 
-    public abstract void gas(double amount);
+    @Override
+    public void gas(double amount) {
+        // Can only gas between 0 and 1
+        if (0 <= amount && amount <= 1) {
+            incrementSpeed(amount);
+        } else {
+            throw new IllegalArgumentException("Only values in range [0-1] are accepted.");
+        }
+    }
 
+    @Override
     public void brake(double amount) {
         // Can only brake between 0 and 1
         if (0 <= amount && amount <= 1) {
