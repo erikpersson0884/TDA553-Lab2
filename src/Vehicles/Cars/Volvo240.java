@@ -3,10 +3,9 @@ package Vehicles.Cars;
 import java.awt.*;
 import java.math.BigDecimal;
 
-
 import Vehicles.Movable;
 
-public class Volvo240 implements ICar, Movable{
+public class Volvo240 implements ICar, Movable {
 
     private TrimCar trimCar;
 
@@ -40,11 +39,9 @@ public class Volvo240 implements ICar, Movable{
         trimCar.brake(amount);
     }
 
-
     public double getEnginePower() {
         return trimCar.getEnginePower();
     }
-
 
     public double getCurrentSpeed() {
         return trimCar.getCurrentSpeed();

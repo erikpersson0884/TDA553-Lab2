@@ -10,5 +10,5 @@ public class TransporterRamp extends Ramp {
     public boolean rampIsInCorrectPosistionWhenMoving() {
         return !this.getRampIsDown();
     }
-    
+
 }

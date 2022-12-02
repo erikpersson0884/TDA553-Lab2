@@ -11,7 +11,7 @@ public abstract class Car extends Vehicle implements ICar {
         super(modelName, enginePower, color, nrDoors, x, y);
     }
 
-    public void loadCar(){
+    public void loadCar() {
         setX(null);
         setY(null);
     }

@@ -1,6 +1,5 @@
 package Ramps;
 
-
 public abstract class Ramp {
     private int rampAngle;
     private boolean rampIsDown;
@@ -17,7 +16,7 @@ public abstract class Ramp {
     public void setRampIsDown(boolean newRampState) {
         rampIsDown = newRampState;
     }
-    
+
     public boolean getRampIsDown() {
         return rampIsDown;
     }
@@ -29,18 +28,18 @@ public abstract class Ramp {
     public int getMinAngle() {
         return this.MIN_ANGLE;
     }
-    
-    public int getRampAngle(){
+
+    public int getRampAngle() {
         return rampAngle;
     }
-    
-    private void setRampAngle(int newAngle){
+
+    private void setRampAngle(int newAngle) {
         rampAngle = newAngle;
     }
 
     // raise ramp from current position, can only between [0-70].
 
-    public void raiseRamp(int degrees){
+    public void raiseRamp(int degrees) {
         ensureDegreesIsValidRange(degrees);
 
         int newAngle = getRampAngle() + degrees;
@@ -57,10 +56,10 @@ public abstract class Ramp {
 
         int newAngle = getRampAngle() - degrees;
 
-        if  (MIN_ANGLE < degrees && newAngle >= MIN_ANGLE) {
+        if (MIN_ANGLE < degrees && newAngle >= MIN_ANGLE) {
             setRampAngle(newAngle);
         }
-        
+
         if (getRampAngle() == MIN_ANGLE) {
             setRampIsDown(true);
         }
@@ -76,8 +75,8 @@ public abstract class Ramp {
         rampIsDown = true;
     }
 
-     private void ensureDegreesIsValidRange(int degrees) {
-        if (degrees < MIN_ANGLE || degrees > MAX_ANGLE){
+    private void ensureDegreesIsValidRange(int degrees) {
+        if (degrees < MIN_ANGLE || degrees > MAX_ANGLE) {
             throw new IllegalArgumentException("Degrees must be in the interval [0-maxAngle]");
         }
     }

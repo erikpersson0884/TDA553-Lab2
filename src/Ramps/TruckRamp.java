@@ -1,6 +1,6 @@
 package Ramps;
 
-public class TruckRamp extends Ramp{
+public class TruckRamp extends Ramp {
 
     public TruckRamp() {
         super(70);
@@ -10,5 +10,5 @@ public class TruckRamp extends Ramp{
     public boolean rampIsInCorrectPosistionWhenMoving() {
         return this.getRampIsDown();
     }
-    
+
 }

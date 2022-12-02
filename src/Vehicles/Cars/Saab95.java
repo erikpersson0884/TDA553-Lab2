@@ -1,13 +1,12 @@
 package Vehicles.Cars;
+
 import java.awt.*;
 
 import java.math.BigDecimal;
 
-
 import Vehicles.Movable;
 
-
-public class Saab95 implements ICar, Movable{
+public class Saab95 implements ICar, Movable {
     private TurboCar turboCar;
 
     public Saab95(double enginePower, Color color, double x, double y) {
@@ -39,11 +38,9 @@ public class Saab95 implements ICar, Movable{
         turboCar.brake(amount);
     }
 
-
     public double getEnginePower() {
         return turboCar.getEnginePower();
     }
-
 
     public double getCurrentSpeed() {
         return turboCar.getCurrentSpeed();

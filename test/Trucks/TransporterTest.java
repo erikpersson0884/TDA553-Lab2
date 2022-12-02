@@ -1,4 +1,4 @@
-package Cars;
+package Trucks;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
@@ -11,8 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import CustomExceptions.CarIsAlreadyLoadedException;
-import CustomExceptions.CarStorageFullException;
+import CustomExceptions.*;
 
 import Vehicles.Cars.ICar;
 import Vehicles.Cars.Saab95;
@@ -116,8 +115,10 @@ public class TransporterTest {
 
     @Test
     public void loading_car_to_transporter_when_it_is_full_should_not_add_the_car() {
-        ICar[] myCars = {new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0), new Saab95(0, null, 0, 0), new Volvo240(0, null, 0, 0),
-                new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0)};
+        ICar[] myCars = { new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0), new Saab95(0, null, 0, 0),
+                new Volvo240(0, null, 0, 0),
+                new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0),
+                new Volvo240(0, null, 0, 0) };
 
         assertThrows(CarStorageFullException.class, () -> {
             for (ICar car : myCars) {
@@ -129,9 +130,9 @@ public class TransporterTest {
     @Test
     public void cant_load_same_car_twice_in_the_transporter() {
         ICar myVolvo = new Volvo240(0, null, 0, 0);
-            
-        assertThrows(CarIsAlreadyLoadedException.class, () -> {  
-            Transporter.loadCar(myVolvo);  
+
+        assertThrows(CarIsAlreadyLoadedException.class, () -> {
+            Transporter.loadCar(myVolvo);
             Transporter.loadCar(myVolvo);
         });
     }
@@ -145,16 +146,15 @@ public class TransporterTest {
         Transporter.raiseRamp();
         Transporter.gas(1);
         Transporter.move();
-        
+
         while (Transporter.getCurrentSpeed() > 0) {
             Transporter.brake(1);
         }
 
         Transporter.lowerRamp();
         Transporter.unLoadCar(myVolvo);
-        
+
         assertFalse(prevX == myVolvo.getX().doubleValue());
     }
-
 
 }

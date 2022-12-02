@@ -8,7 +8,8 @@ import Vehicles.Vehicle;
 public class Truck extends Vehicle {
     private Ramp ramp;
 
-    public Truck(String modelname, double enginePower, Color color, int nrDoors, double x, double y, int maxAngle, Ramp ramp) {
+    public Truck(String modelname, double enginePower, Color color, int nrDoors, double x, double y, int maxAngle,
+            Ramp ramp) {
         super(modelname, enginePower, color, nrDoors, x, y);
         this.ramp = ramp;
     }
@@ -17,7 +18,7 @@ public class Truck extends Vehicle {
     protected double speedFactor() {
         return getEnginePower() * 0.01;
     }
-    
+
     @Override
     // Methods for changing the speed of a Truck
     public void gas(double amount) {

@@ -1,11 +1,9 @@
 package Vehicles;
 
-
 import java.awt.Color;
 import java.math.BigDecimal;
 
 import Utility.Positionable;
-
 
 public abstract class Vehicle extends Positionable implements Movable, IVehicle {
     // Instance variables
@@ -32,7 +30,6 @@ public abstract class Vehicle extends Positionable implements Movable, IVehicle 
         return enginePower;
     }
 
-    
     @Override
     public double getCurrentSpeed() {
         return currentSpeed;
@@ -42,6 +39,9 @@ public abstract class Vehicle extends Positionable implements Movable, IVehicle 
         return color;
     }
 
+    public int getNrDoors() {
+        return nrDoors;
+    }
 
     private void setCurrentSpeed(double newSpeed) {
         currentSpeed = newSpeed;
@@ -131,9 +131,9 @@ public abstract class Vehicle extends Positionable implements Movable, IVehicle 
     }
 
     @Override
-    public void gas(double amount){
+    public void gas(double amount) {
         // Can only gas between 0 and 1
-        if (0 <= amount && amount <= 1){
+        if (0 <= amount && amount <= 1) {
             incrementSpeed(amount);
         } else {
             throw new IllegalArgumentException("Only values in range [0-1] are accepted.");

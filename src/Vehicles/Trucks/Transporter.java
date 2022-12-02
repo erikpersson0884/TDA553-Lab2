@@ -11,9 +11,7 @@ import Utility.IPositionable;
 import Vehicles.Movable;
 import Vehicles.Cars.ICar;
 
-
-public class Transporter implements Movable, IPositionable{
-
+public class Transporter implements Movable, IPositionable {
     private Truck truck;
     private int maxAngle;
 
