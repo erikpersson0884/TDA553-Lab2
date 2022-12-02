@@ -27,11 +27,13 @@ public abstract class Vehicle extends Positionable implements Movable, IVehicle 
     }
 
     // Getters and Setters
-
+    @Override
     public double getEnginePower() {
         return enginePower;
     }
 
+    
+    @Override
     public double getCurrentSpeed() {
         return currentSpeed;
     }
@@ -128,6 +130,7 @@ public abstract class Vehicle extends Positionable implements Movable, IVehicle 
             setCurrentSpeed(newSpeed);
     }
 
+    @Override
     public void gas(double amount){
         // Can only gas between 0 and 1
         if (0 <= amount && amount <= 1){
@@ -137,6 +140,7 @@ public abstract class Vehicle extends Positionable implements Movable, IVehicle 
         }
     }
 
+    @Override
     public void brake(double amount) {
         // Can only brake between 0 and 1
         if (0 <= amount && amount <= 1) {

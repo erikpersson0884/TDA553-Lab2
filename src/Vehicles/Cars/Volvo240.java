@@ -4,10 +4,9 @@ import java.awt.*;
 import java.math.BigDecimal;
 
 
-import Utility.IPositionable;
 import Vehicles.Movable;
 
-public class Volvo240 implements ICar, Movable, IPositionable {
+public class Volvo240 implements ICar, Movable{
 
     private TrimCar trimCar;
 
@@ -31,11 +30,12 @@ public class Volvo240 implements ICar, Movable, IPositionable {
         trimCar.turnRight();
     }
 
+    @Override
     public void gas(double amount) {
         trimCar.gas(amount);
     }
 
-
+    @Override
     public void brake(double amount) {
         trimCar.brake(amount);
     }

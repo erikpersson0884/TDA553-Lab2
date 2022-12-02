@@ -4,11 +4,10 @@ import java.awt.*;
 import java.math.BigDecimal;
 
 
-import Utility.IPositionable;
 import Vehicles.Movable;
 
 
-public class Saab95 implements ICar, Movable, IPositionable {
+public class Saab95 implements ICar, Movable{
     private TurboCar turboCar;
 
     public Saab95(double enginePower, Color color, double x, double y) {
@@ -30,12 +29,12 @@ public class Saab95 implements ICar, Movable, IPositionable {
         turboCar.turnRight();
     }
 
-  
+    @Override
     public void gas(double amount) {
         turboCar.gas(amount);
     }
 
- 
+    @Override
     public void brake(double amount) {
         turboCar.brake(amount);
     }
@@ -62,7 +61,6 @@ public class Saab95 implements ICar, Movable, IPositionable {
 
     @Override
     public void setCoordsForUnloadedCar(BigDecimal transporterX, BigDecimal transporterY) {
-        // TODO Auto-generated method stub
-        
+        turboCar.setCoordsForUnloadedCar(transporterX, transporterY);
     }
 }
