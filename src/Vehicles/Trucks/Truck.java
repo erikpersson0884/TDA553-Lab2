@@ -2,6 +2,7 @@ package Vehicles.Trucks;
 
 import java.awt.Color;
 
+import CustomExceptions.RampIsNotInCorrectPositionException;
 import Ramps.Ramp;
 import Vehicles.Vehicle;
 
@@ -22,8 +23,12 @@ public class Truck extends Vehicle {
     @Override
     // Methods for changing the speed of a Truck
     public void gas(double amount) {
-        getRamp().rampIsInCorrectPosistionWhenMoving();
-        super.gas(amount);
+        if (!getRamp().rampIsInDrivingPosition()) {
+            throw new RampIsNotInCorrectPositionException("The ramp is not in correct position when moving");
+        } 
+        else {
+            super.gas(amount);
+        }
     }
 
     public Ramp getRamp() {

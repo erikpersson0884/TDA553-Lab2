@@ -133,7 +133,7 @@ public abstract class Vehicle extends Positionable implements Movable, IVehicle 
     @Override
     public void gas(double amount) {
         // Can only gas between 0 and 1
-        if (0 <= amount && amount <= 1) {
+        if (0 <= amount && amount <= 1){
             incrementSpeed(amount);
         } else {
             throw new IllegalArgumentException("Only values in range [0-1] are accepted.");

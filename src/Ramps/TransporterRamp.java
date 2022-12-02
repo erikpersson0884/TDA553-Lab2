@@ -1,14 +1,7 @@
 package Ramps;
 
 public class TransporterRamp extends Ramp {
-
     public TransporterRamp() {
-        super(0);
+        super(0, RampState.UP);
     }
-
-    @Override
-    public boolean rampIsInCorrectPosistionWhenMoving() {
-        return !this.getRampIsDown();
-    }
-
 }

@@ -3,6 +3,7 @@ package Trucks;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.Color;
 import java.math.BigDecimal;
@@ -12,7 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import CustomExceptions.*;
-
+import Ramps.RampState;
 import Vehicles.Cars.ICar;
 import Vehicles.Cars.Saab95;
 import Vehicles.Cars.Volvo240;
@@ -104,13 +105,13 @@ public class TransporterTest {
     @Test
     public void ramp_raises_when_raised() {
         Transporter.raiseRamp();
-        assertFalse(Transporter.getRampIsDown());
+        assertTrue(Transporter.getRampIsInDrivingPosition());
     }
 
     @Test
     public void ramp_lowers_when_lowered() {
         Transporter.lowerRamp();
-        assertTrue(Transporter.getRampIsDown());
+        assertFalse(Transporter.getRampIsInDrivingPosition());
     }
 
     @Test
@@ -120,6 +121,8 @@ public class TransporterTest {
                 new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0), new Volvo240(0, null, 0, 0),
                 new Volvo240(0, null, 0, 0) };
 
+        Transporter.lowerRamp();
+        
         assertThrows(CarStorageFullException.class, () -> {
             for (ICar car : myCars) {
                 Transporter.loadCar(car);
@@ -130,7 +133,7 @@ public class TransporterTest {
     @Test
     public void cant_load_same_car_twice_in_the_transporter() {
         ICar myVolvo = new Volvo240(0, null, 0, 0);
-
+        Transporter.lowerRamp();
         assertThrows(CarIsAlreadyLoadedException.class, () -> {
             Transporter.loadCar(myVolvo);
             Transporter.loadCar(myVolvo);
@@ -142,6 +145,8 @@ public class TransporterTest {
         double prevX = 0;
         double prevY = 0;
         ICar myVolvo = new Volvo240(0, null, prevX, prevY);
+        
+        Transporter.lowerRamp();
         Transporter.loadCar(myVolvo);
         Transporter.raiseRamp();
         Transporter.gas(1);
@@ -150,8 +155,9 @@ public class TransporterTest {
         while (Transporter.getCurrentSpeed() > 0) {
             Transporter.brake(1);
         }
-
+        System.out.println(Transporter.getCurrentSpeed()); 
         Transporter.lowerRamp();
+        System.out.println(Transporter.getRampIsInDrivingPosition());
         Transporter.unLoadCar(myVolvo);
 
         assertFalse(prevX == myVolvo.getX().doubleValue());

@@ -2,13 +2,7 @@ package Ramps;
 
 public class TruckRamp extends Ramp {
 
-    public TruckRamp() {
-        super(70);
+    public TruckRamp(RampState rampState) {
+        super(70, rampState);
     }
-
-    @Override
-    public boolean rampIsInCorrectPosistionWhenMoving() {
-        return this.getRampIsDown();
-    }
-
 }

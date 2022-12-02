@@ -40,9 +40,9 @@ public class Transporter implements Movable, IPositionable {
     public BigDecimal getY() {
         return truck.getY();
     }
-
-    public boolean getRampIsDown() {
-        return truck.getRamp().getRampIsDown();
+    
+    public boolean getRampIsInDrivingPosition() {
+        return truck.getRamp().rampIsInDrivingPosition();
     }
 
     public void move() {
@@ -61,7 +61,7 @@ public class Transporter implements Movable, IPositionable {
         truck.brake(amount);
     }
 
-    protected double getSpeedFactor() {
+    private double getSpeedFactor() {
         return truck.speedFactor();
     }
 
@@ -82,17 +82,19 @@ public class Transporter implements Movable, IPositionable {
     // -------- Methods for loading cars ----------
 
     public void loadCar(ICar carToBeLoaded) {
-        carStorage.loadCar(carToBeLoaded, truck);
-
-        if (!getRampIsDown()) {
-            throw new RampIsNotDownException("The transporters' ramp is not down");
+        if (getRampIsInDrivingPosition()) {
+            throw new RampIsNotInCorrectPositionException("The transporters' ramp is not down");
+        } else {
+            carStorage.loadCar(carToBeLoaded, truck);
         }
     }
 
     public void unLoadCar(ICar carToBeUnloaded) {
-        if (!getRampIsDown()) {
-            throw new RampIsNotDownException("The transporters' ramp is not down");
+        if (getRampIsInDrivingPosition()) {
+            throw new RampIsNotInCorrectPositionException("The transporters' ramp is not down");
+        } else {
+            carStorage.unLoadCar(carToBeUnloaded, truck);
         }
-        carStorage.unLoadCar(carToBeUnloaded, truck);
+        
     }
 }

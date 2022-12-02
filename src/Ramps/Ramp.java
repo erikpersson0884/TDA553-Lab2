@@ -1,24 +1,25 @@
 package Ramps;
 
+
 public abstract class Ramp {
+    private RampState rampStateWhenDriving;
     private int rampAngle;
-    private boolean rampIsDown;
     private final int MAX_ANGLE;
     private final int MIN_ANGLE;
+    private RampState rampState;
 
-    public Ramp(int MAX_ANGLE) {
+    public Ramp(int MAX_ANGLE, RampState rampStateWhenDriving) {
         this.MAX_ANGLE = MAX_ANGLE;
         this.MIN_ANGLE = 0;
         this.rampAngle = 0;
-        this.rampIsDown = true;
+        this.rampStateWhenDriving = rampStateWhenDriving;
+        this.rampState = rampStateWhenDriving;
     }
-
-    public void setRampIsDown(boolean newRampState) {
-        rampIsDown = newRampState;
+    private void setRampState(RampState newRampState){
+        rampState = newRampState;
     }
-
-    public boolean getRampIsDown() {
-        return rampIsDown;
+    private RampState getRampState() {
+        return rampState;
     }
 
     public int getMaxAngle() {
@@ -47,7 +48,7 @@ public abstract class Ramp {
             setRampAngle(newAngle);
         }
 
-        setRampIsDown(true);
+        setRampState(RampState.UP);
     }
 
     // lower ramp from current position, can only between [0-70].
@@ -61,18 +62,18 @@ public abstract class Ramp {
         }
 
         if (getRampAngle() == MIN_ANGLE) {
-            setRampIsDown(true);
+        setRampState(RampState.DOWN);
         }
     }
 
     public void raiseRampToMax() {
         rampAngle = MAX_ANGLE;
-        rampIsDown = false;
+        setRampState(RampState.UP);
     }
 
     public void lowerRampToMin() {
         rampAngle = MIN_ANGLE;
-        rampIsDown = true;
+        setRampState(RampState.DOWN);
     }
 
     private void ensureDegreesIsValidRange(int degrees) {
@@ -81,6 +82,13 @@ public abstract class Ramp {
         }
     }
 
-    public abstract boolean rampIsInCorrectPosistionWhenMoving();
-
+    public boolean rampIsInDrivingPosition() {
+        getRampState();
+        if (getRampState() == rampStateWhenDriving){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 }

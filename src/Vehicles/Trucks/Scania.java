@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import Ramps.TruckRamp;
 import Utility.IPositionable;
 import Vehicles.Movable;
+import Ramps.RampState;
 
 public class Scania implements Movable, IPositionable {
     private Truck truck;
@@ -13,7 +14,7 @@ public class Scania implements Movable, IPositionable {
 
     public Scania(double enginePower, Color color, double x, double y) {
         this.maxAngle = 70;
-        this.truck = new Truck("Scania", enginePower, color, 2, x, y, maxAngle, new TruckRamp());
+        this.truck = new Truck("Scania", enginePower, color, 2, x, y, maxAngle, new TruckRamp(RampState.DOWN));
     }
 
     // --------- delegated methods -----------------
