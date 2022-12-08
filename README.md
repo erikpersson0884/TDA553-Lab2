@@ -44,7 +44,7 @@ actions depending on the parameter and return nothing (void).
 
 ### Does your design follow the Liskov Substitution Principle?
 
--Yes, our design has tried to follow the Liskov Substitution Principle as close as possible. Because the subtypes methods accepts the same values as the supertype do the same actions (and maybe a little more) depending on the parameter and return nothing (void).
+- Yes, our design has tried to follow the Liskov Substitution Principle as close as possible. Because the subtypes methods accepts the same values as the supertype do the same actions (and maybe a little more) depending on the parameter and return nothing (void).
 
 
 ## 2. How did you handle duplicated code between Scania, the car transporters and the repair shops? 
