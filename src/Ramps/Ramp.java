@@ -37,20 +37,21 @@ public abstract class Ramp {
         rampAngle = newAngle;
     }
 
-    // raise ramp from current position, can only between [0-70].
+    // raise ramp from current position, can only be between [0-70].
 
     public void raiseRamp(int degrees) {
         ensureDegreesIsValidRange(degrees);
 
         int newAngle = getRampAngle() + degrees;
-        if (newAngle <= MAX_ANGLE) {
+        if (0 < degrees && newAngle <= MAX_ANGLE) {
             setRampAngle(newAngle);
+            setRampState(RampState.UP);
+        } else if(newAngle > MAX_ANGLE) {
+            raiseRampToMax();
         }
-
-        setRampState(RampState.UP);
     }
 
-    // lower ramp from current position, can only between [0-70].
+    // lower ramp from current position, can only be between [0-70].
     public void lowerRamp(int degrees) {
         ensureDegreesIsValidRange(degrees);
 
@@ -58,10 +59,12 @@ public abstract class Ramp {
 
         if (MIN_ANGLE < degrees && newAngle >= MIN_ANGLE) {
             setRampAngle(newAngle);
+        } else if (newAngle < MIN_ANGLE) {
+            lowerRampToMin();
         }
 
         if (getRampAngle() == MIN_ANGLE) {
-        setRampState(RampState.DOWN);
+            setRampState(RampState.DOWN);
         }
     }
 

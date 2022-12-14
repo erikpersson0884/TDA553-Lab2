@@ -2,7 +2,6 @@ package Vehicles.Trucks;
 
 import java.awt.Color;
 
-import CustomExceptions.RampIsNotInCorrectPositionException;
 import Ramps.Ramp;
 import Vehicles.Vehicle;
 
@@ -18,17 +17,12 @@ public class Truck extends Vehicle {
     protected double speedFactor() {
         return getEnginePower() * 0.01;
     }
-
+    
     @Override
-    // Methods for changing the speed of a Truck
-    public void gas(double amount) {
-        if (!getRamp().rampIsInDrivingPosition()) {
-            throw new RampIsNotInCorrectPositionException("The ramp is not in correct position when moving");
-        } 
-        else {
-            super.gas(amount);
-        }
+    protected boolean validGas() {
+        return ramp.rampIsInDrivingPosition();
     }
+
 
     public Ramp getRamp() {
         return ramp;
@@ -45,5 +39,4 @@ public class Truck extends Vehicle {
         if (getCurrentSpeed() == 0)
             ramp.lowerRampToMin();
     }
-
 }

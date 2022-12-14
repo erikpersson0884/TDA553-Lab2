@@ -14,4 +14,9 @@ public class TrimCar extends Car {
     protected double speedFactor() {
         return getEnginePower() * 0.01 * trimFactor;
     }
+
+	@Override
+	protected boolean validGas() {
+		return true;
+	}
 }

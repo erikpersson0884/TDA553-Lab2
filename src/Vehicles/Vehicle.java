@@ -3,6 +3,7 @@ package Vehicles;
 import java.awt.Color;
 import java.math.BigDecimal;
 
+import CustomExceptions.InvalidUseOfGasException;
 import Utility.Positionable;
 
 public abstract class Vehicle extends Positionable implements Movable, IVehicle {
@@ -130,10 +131,14 @@ public abstract class Vehicle extends Positionable implements Movable, IVehicle 
             setCurrentSpeed(newSpeed);
     }
 
+    protected abstract boolean validGas();
+    
     @Override
     public void gas(double amount) {
         // Can only gas between 0 and 1
-        if (0 <= amount && amount <= 1) {
+        if (!validGas()){
+            throw new InvalidUseOfGasException("Invalid use of gas");
+        } else if (0 <= amount && amount <= 1) {
             incrementSpeed(amount);
         } else {
             throw new IllegalArgumentException("Only values in range [0-1] are accepted.");
